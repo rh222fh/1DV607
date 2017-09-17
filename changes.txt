@@ -1,0 +1,15 @@
+-----------------------------------------
+Final submission - Workshop 1 - Changelog
+---------------2017-09-17----------------
+
+- Three seperate association lines between the Member class and the Boat class, to make it more clean and readable.
+
+- Changed association names so that they follow the rule of having them as single verbs; Manages, Assigns, Deletes, Changes, Registers, Views
+
+- Removed the System class and the Authenticate class, because they are not relevant in a Domain Model.
+
+- Changed the Event class to an attribute in the Calendar class, because the calendar is just a list of events and contains multiple events in it.
+
+- Added the attribute Description to the Berth class, which is supposed to contain the information for each Berth. Which can then be used as a history.
+
+- Added directional arrows after associations to improve the clarity.
