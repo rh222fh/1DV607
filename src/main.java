@@ -7,9 +7,9 @@ public class main {
     public static void main(String[] args) {
 
         Registry reg = new Registry();
-        Member mem =  new Member("890705-2990", "Rilind");
-        Member mem2 =  new Member("890705-2990", "Alexander");
-        Member mem3 =  new Member("890705-2990", "Sandra");
+        Member mem =  new Member("000101-2020", "Rilind");
+        Member mem2 =  new Member("000101-2020", "Alexander");
+        Member mem3 =  new Member("000101-2020", "Sandra");
 
         //mem.addBoat(boat);
         reg.addMember(mem);
