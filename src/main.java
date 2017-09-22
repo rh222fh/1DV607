@@ -21,6 +21,8 @@ public class main {
 
         mem.addBoat(boat);
         reg.getCompactList();
+        System.out.println();
+        reg.getVerboseList();
 
 
     }

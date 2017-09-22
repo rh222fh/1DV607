@@ -22,21 +22,38 @@ public class Registry {
         return members.get(id);
     }
 
-    public String getCompactList(){
-        String compactList = ("ID\tName\tNumber of boats\n");
+    public void getCompactList(){
+        int ID;
+        String name;
+        int numberOfBoats;
+
+        System.out.printf("%-3s %-10s %-10s\n", "ID", "Name", "Number of Boats");
+
         for (int i = 0; i <members.size() ; i++) {
-            compactList+=(i+"\t" +this.getMember(i).getName() +"\t"+this.getMember(i).countBoats() +"\n");
+            ID = i;
+            name = this.getMember(i).getName();
+            numberOfBoats = this.getMember(i).countBoats();
+            System.out.printf("%-3s %-10s %-10s\n", ID, name, numberOfBoats);
+
         }
-        return compactList;
     }
 
-    public String getVerboseList(){
-        String verboseList = ("ID          Name             Personal number            boats \n");
-        for (int i = 0; i <members.size() ; i++) {
-            verboseList+=(i+"\t" +this.getMember(i).getName()+"\t" +this.getMember(i).getpNumber()+"\t" +this.getMember(i).countBoats() +"\n");
-        }
-        return verboseList;
+    public void getVerboseList(){
+        int ID;
+        String name;
+        String pNumber;
+        int numberOfBoats;
 
+        System.out.printf("%-3s %-10s %-20s %-10s\n", "ID", "Name", "Personal Number", "Number of Boats");
+
+        for (int i = 0; i <members.size() ; i++) {
+            ID = i;
+            name = this.getMember(i).getName();
+            pNumber = this.getMember(i).getpNumber();
+            numberOfBoats = this.getMember(i).countBoats();
+            System.out.printf("%-3s %-10s %-20s %-10s\n", ID, name, pNumber, numberOfBoats);
+
+        }
     }
 
 
