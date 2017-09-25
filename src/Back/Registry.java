@@ -80,6 +80,14 @@ public class Registry {
         }
     }
 
+    public boolean memberExists(int id) {
+        for (Member m: members) {
+            if (id == m.getId())
+                return true;
+        }
+        return false;
+    }
+
 
 
 
