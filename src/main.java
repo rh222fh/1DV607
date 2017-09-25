@@ -117,7 +117,7 @@ public class main {
                 case "7":
                     break;
                 case "8":
-                    System.out.print("Enter ID: ");
+                    System.out.println("Enter ID: ");
                     id = Integer.parseInt(scanner.nextLine());
 
                     System.out.println("|============== Member:  "+ id +" ==============|");
@@ -130,39 +130,56 @@ public class main {
                     System.out.println("| 13. Delete member                         |");
                     System.out.println("| 0. Return                                 |");
                     System.out.println("|===========================================|");
-                    System.out.print("Waiting for key press...");
-                    if (!scanner.nextLine().equals("0")) {
-                       if(scanner.nextLine().equals("9")){page = "9";}
-                       else if(scanner.nextLine().equals("10")){page = "10";}
-                       else if(scanner.nextLine().equals("11")){page = "11";}
-                       else if(scanner.nextLine().equals("12")){page = "12";}
-                       else if(scanner.nextLine().equals("13")){page = "13";}
-                    } else if(scanner.nextLine().equals("0")){
-                        page = "0";
-                    }else{
-                        System.err.println("You can only press one of the keys listed above. Try again.");
+
+                    String input;
+
+                    input = scanner.nextLine();
+                    if (!page.equals("0")) {
+                        switch (input) {
+                            case "9":
+                                page = "9";
+                                break;
+                            case "10":
+                                page = "10";
+                                break;
+                            case "11":
+                                page = "10";
+                                break;
+                            case "12":
+                                page = "10";
+                                break;
+                            case "13":
+                                page = "10";
+                                break;
+                            default:
+                                System.err.println("You can only press one of the keys listed above, try again.");
+                                page = "8";
+                                break;
+                        }
                     }
-
-
+                    else {
+                        page = "0";
+                    }
 
                     break;
                 case "9":
+                    System.out.println("Page 9");
                     break;
                 case "10":
+                    System.out.println("Page 10");
                     break;
                 case "11":
+                    System.out.println("Page 11");
                     break;
                 case "12":
+                    System.out.println("Page 12");
                     break;
                 case "13":
+                    System.out.println("Page 13");
                     break;
             }
         }
     }
     public static void clear() {
-        for(int clear = 0; clear < 1000; clear++)
-        {
-            System.out.println("\b") ;
-        }
     }
 }
