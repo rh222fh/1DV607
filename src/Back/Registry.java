@@ -25,6 +25,11 @@ public class Registry {
         return id;
     }
 
+    public void changeMember(int id, String name, String pNumber){
+        getMember(id).setName(name);
+        getMember(id).setPersonalNumber(pNumber);
+    }
+
     public void deleteMember(Member m){
         members.remove(m);
         System.out.println(m+"deleted from registry");
