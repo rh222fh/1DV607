@@ -1,6 +1,7 @@
 import Back.Boat;
 import Back.Member;
 import Back.Registry;
+import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -66,6 +67,7 @@ public class main {
                     }
                     break;
                 case "2":
+                    System.out.println("Test2");
                     break;
                 case "3":
                     break;
