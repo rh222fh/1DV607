@@ -1,17 +1,19 @@
 package Back;
 
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 public class Member {
 
     private String pNumber;
     private String name;
+    private Integer id;
     private ArrayList<Boat> boats = new ArrayList<>();
+
 
     public Member(String number, String mName){
         pNumber = number;
         name = mName;
-
     }
 
     public void setName(String s){
@@ -41,4 +43,8 @@ public class Member {
     public String getpNumber(){
         return pNumber;
     }
+
+    public Integer getId(){ return id;}
+
+    public void setId(Integer id){this.id = id;}
 }
