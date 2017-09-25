@@ -95,9 +95,33 @@ public class main {
                     }
                     break;
                 case "3":
-                    System.out.println("test");
+                    System.out.println("|============ Show verbose list ============|");
+                    System.out.println("| Press ENTER to show a verbose list of all |");
+                    System.out.println("| members, press 0 to return to startpage   |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        reg.getVerboseList();
+                        System.out.print("Press any key to return to startpage....");
+                        scanner.nextLine();
+                        page = "0";
+                    }
+
                     break;
                 case "4":
+                    System.out.println("|============ Show compact list ============|");
+                    System.out.println("| Press ENTER to show a compact list of all |");
+                    System.out.println("| members, press 0 to return to startpage   |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        reg.getCompactList();
+                        System.out.print("Press any key to return to startpage....");
+                        scanner.nextLine();
+                        page = "0";
+                    }
                     break;
                 case "5":
                     break;
