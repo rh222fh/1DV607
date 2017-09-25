@@ -68,7 +68,7 @@ public class Registry {
         for (Member m: members) {
             ID = m.getId();
             name = m.getName();
-            pNumber = m.getpNumber();
+            pNumber = m.getPersonalNumber();
             numberOfBoats = m.countBoats();
             System.out.printf("%-5s %-10s %-20s %-10s\n", ID, name, pNumber, numberOfBoats);
 

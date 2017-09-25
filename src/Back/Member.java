@@ -40,7 +40,7 @@ public class Member {
         return name;
     }
 
-    public String getpNumber(){
+    public String getPersonalNumber(){
         return pNumber;
     }
 

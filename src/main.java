@@ -12,6 +12,7 @@ public class main {
         Scanner scanner = new Scanner(System.in);
         String name;
         String pNumber;
+        int id;
 
         Registry reg = new Registry();
         String page = "0";
@@ -67,7 +68,31 @@ public class main {
                     }
                     break;
                 case "2":
-                    System.out.println("Test2");
+                    System.out.println("|============== Select member ==============|");
+                    System.out.println("| Enter member ID and press ENTER to        |");
+                    System.out.println("| continue or press 0 to return.            |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        System.out.print("Enter ID: ");
+                        id = Integer.parseInt(scanner.nextLine());
+
+                        System.out.println("|============== Member:  "+ id +" ==============|");
+                        System.out.println("| Select a number to get to the             |");
+                        System.out.println("| corresponding page.                       |");
+                        System.out.println("| 8. Edit member                            |");
+                        System.out.println("| 9. Add boat                               |");
+                        System.out.println("| 10. Edit boat                             |");
+                        System.out.println("| 11. Delete boat                           |");
+                        System.out.println("| 12. Delete member                         |");
+                        System.out.println("| 0. Return                                 |");
+                        System.out.println("|===========================================|");
+                        page = scanner.nextLine();
+                    }
+                    else {
+                        page = "0";
+                    }
                     break;
                 case "3":
                     System.out.println("test");
