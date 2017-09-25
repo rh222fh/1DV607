@@ -124,13 +124,27 @@ public class main {
                     System.out.println("| Select a number to get to the             |");
                     System.out.println("| corresponding page.                       |");
                     System.out.println("| 9. Edit member                            |");
-                    System.out.println("| 10. Add boat                               |");
+                    System.out.println("| 10. Add boat                              |");
                     System.out.println("| 11. Edit boat                             |");
                     System.out.println("| 12. Delete boat                           |");
                     System.out.println("| 13. Delete member                         |");
                     System.out.println("| 0. Return                                 |");
                     System.out.println("|===========================================|");
-                    page = scanner.nextLine();
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                       if(scanner.nextLine().equals("9")){page = "9";}
+                       else if(scanner.nextLine().equals("10")){page = "10";}
+                       else if(scanner.nextLine().equals("11")){page = "11";}
+                       else if(scanner.nextLine().equals("12")){page = "12";}
+                       else if(scanner.nextLine().equals("13")){page = "13";}
+                    } else if(scanner.nextLine().equals("0")){
+                        page = "0";
+                    }else{
+                        System.err.println("You can only press one of the keys listed above. Try again.");
+                    }
+
+
+
                     break;
                 case "9":
                     break;
