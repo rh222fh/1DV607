@@ -14,10 +14,10 @@ public class Registry {
        System.out.println(m+"added to registry");
     }
 
-    public Integer generateId(Member m){
+    public int generateId(Member m){
         int id = (int)(Math.random()*9000)+1000;
         for (int i = 0; i <members.size() ; i++) {
-            if (m.getId().equals(id)){
+            if (m.getId() == id){
                 id = (int)(Math.random()*9000)+1000;
                 i = 0;
             }

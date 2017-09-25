@@ -7,7 +7,7 @@ public class Member {
 
     private String pNumber;
     private String name;
-    private Integer id;
+    private int id;
     private ArrayList<Boat> boats = new ArrayList<>();
 
 
@@ -44,7 +44,7 @@ public class Member {
         return pNumber;
     }
 
-    public Integer getId(){ return id;}
+    public int getId(){ return id;}
 
     public void setId(Integer id){this.id = id;}
 }
