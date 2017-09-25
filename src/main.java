@@ -70,7 +70,19 @@ public class main {
                     System.out.println("Test2");
                     break;
                 case "3":
-                    System.out.println("test");
+                    System.out.println("|============ Show verbose list ============|");
+                    System.out.println("| Press ENTER to show a verbose list of all |");
+                    System.out.println("| members, press 0 to return to startpage   |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        reg.getVerboseList();
+                        System.out.print("Press any key to return to startpage....");
+                        scanner.nextLine();
+                        page = "0";
+                    }
+
                     break;
                 case "4":
                     break;
