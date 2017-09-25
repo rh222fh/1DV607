@@ -68,6 +68,7 @@ public class main {
                 case "2":
                     break;
                 case "3":
+                    System.out.println("test");
                     break;
                 case "4":
                     break;
