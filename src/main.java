@@ -75,20 +75,7 @@ public class main {
                     System.out.println("|===========================================|");
                     System.out.print("Waiting for key press...");
                     if (!scanner.nextLine().equals("0")) {
-                        System.out.print("Enter ID: ");
-                        id = Integer.parseInt(scanner.nextLine());
-
-                        System.out.println("|============== Member:  "+ id +" ==============|");
-                        System.out.println("| Select a number to get to the             |");
-                        System.out.println("| corresponding page.                       |");
-                        System.out.println("| 8. Edit member                            |");
-                        System.out.println("| 9. Add boat                               |");
-                        System.out.println("| 10. Edit boat                             |");
-                        System.out.println("| 11. Delete boat                           |");
-                        System.out.println("| 12. Delete member                         |");
-                        System.out.println("| 0. Return                                 |");
-                        System.out.println("|===========================================|");
-                        page = scanner.nextLine();
+                       page = "8";
                     }
                     else {
                         page = "0";
@@ -128,6 +115,32 @@ public class main {
                 case "6":
                     break;
                 case "7":
+                    break;
+                case "8":
+                    System.out.print("Enter ID: ");
+                    id = Integer.parseInt(scanner.nextLine());
+
+                    System.out.println("|============== Member:  "+ id +" ==============|");
+                    System.out.println("| Select a number to get to the             |");
+                    System.out.println("| corresponding page.                       |");
+                    System.out.println("| 9. Edit member                            |");
+                    System.out.println("| 10. Add boat                               |");
+                    System.out.println("| 11. Edit boat                             |");
+                    System.out.println("| 12. Delete boat                           |");
+                    System.out.println("| 13. Delete member                         |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    page = scanner.nextLine();
+                    break;
+                case "9":
+                    break;
+                case "10":
+                    break;
+                case "11":
+                    break;
+                case "12":
+                    break;
+                case "13":
                     break;
             }
         }
