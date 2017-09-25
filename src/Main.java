@@ -12,11 +12,12 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String name;
         String pNumber;
-        int id;
+        int id = 0;
 
         Registry reg = new Registry();
         String page = "0";
         String confirm;
+        String input;
 
         while (!page.equals("7")) {
             switch (page) {
@@ -75,7 +76,9 @@ public class Main {
                     System.out.println("|===========================================|");
                     System.out.print("Waiting for key press...");
                     if (!scanner.nextLine().equals("0")) {
-                       page = "8";
+                        System.out.println("Enter ID: ");
+                        id = Integer.parseInt(scanner.nextLine());
+                        page = "8";
                     }
                     else {
                         page = "0";
@@ -117,9 +120,6 @@ public class Main {
                 case "7":
                     break;
                 case "8":
-                    System.out.println("Enter ID: ");
-                    id = Integer.parseInt(scanner.nextLine());
-
                     System.out.println("|============== Member:  "+ id +" ==============|");
                     System.out.println("| Select a number to get to the             |");
                     System.out.println("| corresponding page.                       |");
@@ -131,10 +131,8 @@ public class Main {
                     System.out.println("| 0. Return                                 |");
                     System.out.println("|===========================================|");
 
-                    String input;
-
                     input = scanner.nextLine();
-                    if (!page.equals("0")) {
+                    if (!input.equals("0")) {
                         switch (input) {
                             case "9":
                                 page = "9";
@@ -149,7 +147,19 @@ public class Main {
                                 page = "10";
                                 break;
                             case "13":
-                                page = "10";
+                                System.out.println("Are you sure that you want to delete "+reg.getMember(id).getName()+"("+reg.getMember(id).getId()+")"+" Yes/No");
+                                confirm = scanner.nextLine();
+                                if (confirm.toLowerCase().equals("yes")) {
+                                    reg.deleteMember(reg.getMember(id));
+                                }
+                                else if(confirm.toLowerCase().equals("no")) {
+                                    System.out.println(reg.getMember(id).getName()+" was not deleted.");
+                                    page = "8";
+                                }
+                                else {
+                                    System.err.println("Member was not deleted, you can only write yes or no. Try again.");
+                                }
+
                                 break;
                             default:
                                 System.err.println("You can only press one of the keys listed above, try again.");
@@ -163,7 +173,39 @@ public class Main {
 
                     break;
                 case "9":
-                    System.out.println("Page 9");
+                    System.out.println("|========== Edit member:  "+ id +" =========|");
+                    System.out.println("| Select a number to get to the             |");
+                    System.out.println("| corresponding page.                       |");
+                    System.out.println("| 1. Edit name                             |");
+                    System.out.println("| 2. Edit personal number                  |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+
+                    input = scanner.nextLine();
+                    if (!page.equals("0")) {
+                        switch (input) {
+                            case "1":
+                                System.out.print("Enter name: ");
+                                name = scanner.nextLine();
+                                reg.getMember(id).setName(name);
+                                page = "9";
+                                break;
+                            case "2":
+                                System.out.print("Enter personal number: ");
+                                pNumber = scanner.nextLine();
+                                reg.getMember(id).setPersonalNumber(pNumber);
+                                page = "9";
+                                break;
+                            default:
+                                System.err.println("You can only press one of the keys listed above, try again.");
+                                page = "9";
+                                break;
+
+                        }
+                    }
+                    else {
+                        page = "0";
+                    }
                     break;
                 case "10":
                     System.out.println("Page 10");
@@ -175,6 +217,12 @@ public class Main {
                     System.out.println("Page 12");
                     break;
                 case "13":
+                    System.out.println("Page 13");
+                    break;
+                case "14":
+                    System.out.println("Page 13");
+                    break;
+                case "15":
                     System.out.println("Page 13");
                     break;
             }
