@@ -30,8 +30,14 @@ public class Registry {
         System.out.println(m+"deleted from registry");
     }
 
-    public Member getMember(int id){
-        return members.get(id);
+    public Member getMember(int id) {
+        for (Member m : members) {
+            if (id == m.getId()) {
+                return m;
+            }
+        }
+        System.out.println("Member not found!");
+        return null;
     }
 
     public ArrayList getList(){return  members;}
@@ -43,12 +49,11 @@ public class Registry {
 
         System.out.printf("%-5s %-10s %-10s\n", "ID", "Name", "Number of Boats");
 
-        for (int i = 0; i <members.size() ; i++) {
-            ID = this.getMember(i).getId();
-            name = this.getMember(i).getName();
-            numberOfBoats = this.getMember(i).countBoats();
+        for (Member m: members) {
+            ID = m.getId();
+            name = m.getName();
+            numberOfBoats = m.countBoats();
             System.out.printf("%-5s %-10s %-10s\n", ID, name, numberOfBoats);
-
         }
     }
 
@@ -60,11 +65,11 @@ public class Registry {
 
         System.out.printf("%-5s %-10s %-20s %-10s\n", "ID", "Name", "Personal Number", "Number of Boats");
 
-        for (int i = 0; i <members.size() ; i++) {
-            ID = this.getMember(i).getId();
-            name = this.getMember(i).getName();
-            pNumber = this.getMember(i).getpNumber();
-            numberOfBoats = this.getMember(i).countBoats();
+        for (Member m: members) {
+            ID = m.getId();
+            name = m.getName();
+            pNumber = m.getpNumber();
+            numberOfBoats = m.countBoats();
             System.out.printf("%-5s %-10s %-20s %-10s\n", ID, name, pNumber, numberOfBoats);
 
         }
