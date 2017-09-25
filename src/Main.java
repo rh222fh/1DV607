@@ -237,7 +237,6 @@ public class Main {
                         else {
                             System.err.println("Boat was not added, you can only write yes or no. Try again.");
                         }
-
                     }
                     else {
                         page = "8";
