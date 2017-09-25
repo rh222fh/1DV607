@@ -11,7 +11,7 @@ public class Registry {
     public void addMember(Member m){
        members.add(m);
        m.setId(generateId(m));
-       System.out.println(m+"added to registry");
+       System.out.println(m.getName()+" added to registry");
     }
 
     public int generateId(Member m){
