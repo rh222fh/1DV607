@@ -70,6 +70,7 @@ public class main {
                     System.out.println("Test2");
                     break;
                 case "3":
+                    System.out.println("test");
                     break;
                 case "4":
                     break;
