@@ -14,6 +14,7 @@ public class Main {
         String pNumber;
         int id = 0;
         String input;
+        int boatId = 0;
 
         Registry reg = new Registry();
         String page = "0";
@@ -179,8 +180,8 @@ public class Main {
                     System.out.println("|========== Edit member:  "+ id +" =========|");
                     System.out.println("| Select a number to get to the             |");
                     System.out.println("| corresponding page.                       |");
-                    System.out.println("| 1. Edit name                             |");
-                    System.out.println("| 2. Edit personal number                  |");
+                    System.out.println("| 1. Edit name                              |");
+                    System.out.println("| 2. Edit personal number                   |");
                     System.out.println("| 0. Return                                 |");
                     System.out.println("|===========================================|");
                     input = scanner.nextLine();
@@ -243,7 +244,25 @@ public class Main {
                     }
                     break;
                 case "11":
-                    System.out.println("Page 11");
+                    System.out.println("|================ Edit boat ================|");
+                    System.out.println("| Enter boat ID and press ENTER to          |");
+                    System.out.println("| continue or press 0 to return.            |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        System.out.println("Enter ID: ");
+                        boatId = Integer.parseInt(scanner.nextLine());
+
+                        System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+                        boatType = scanner.nextLine();
+                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType));
+
+                        System.out.print("Enter boat length: ");
+                        boatLength = scanner.nextLine();
+                        reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
+
+                    }
                     break;
                 case "12":
                     System.out.println("Page 12");
