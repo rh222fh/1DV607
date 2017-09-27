@@ -66,16 +66,23 @@ public class Registry {
         int ID;
         String name;
         String pNumber;
-        int numberOfBoats;
+        int boatLength;
+        Object boatType;
+        String boatInfo = "";
 
-        System.out.printf("%-5s %-10s %-20s %-10s\n", "ID", "Name", "Personal Number", "Number of Boats");
+        System.out.printf("%-5s %-10s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
 
         for (Member m: members) {
             ID = m.getId();
             name = m.getName();
             pNumber = m.getPersonalNumber();
-            numberOfBoats = m.countBoats();
-            System.out.printf("%-5s %-10s %-20s %-10s\n", ID, name, pNumber, numberOfBoats);
+            for (int i = 0; i <= m.countBoats(); i++){
+                boatType = m.getBoats().get(i).getType();
+                boatLength = m.getBoats().get(i).getLength();
+                boatInfo = i + ". " + boatType + " " + boatLength + "\n";
+            }
+
+            System.out.printf("%-5s %-10s %-20s %-10s\n", ID, name, pNumber, boatInfo);
 
         }
     }
