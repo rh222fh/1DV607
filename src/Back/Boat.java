@@ -4,7 +4,7 @@ public class Boat {
     private Type bt;
     private int length;
 
-    public enum Type { Sailboat, Motorsailer, Canoe, Other }
+    public enum Type { sailboat, motorsailer, canoe, other }
 
     public Boat(Type bt, int length) {
         this.bt = bt;

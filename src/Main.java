@@ -228,7 +228,7 @@ public class Main {
                         System.out.println("Add boat to member? Yes/No");
                         confirm = scanner.nextLine();
                         if (confirm.toLowerCase().equals("yes")) {
-                            Boat boat = new Boat(Boat.Type.valueOf(boatType), Integer.valueOf(boatLength));
+                            Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
                             reg.getMember(id).addBoat(boat);
                         }
                         else if(confirm.toLowerCase().equals("no")) {
