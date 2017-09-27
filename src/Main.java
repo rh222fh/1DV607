@@ -256,16 +256,46 @@ public class Main {
 
                         System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
                         boatType = scanner.nextLine();
-                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType));
+                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
 
                         System.out.print("Enter boat length: ");
                         boatLength = scanner.nextLine();
                         reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
 
                     }
+                    else {
+                        page = "0";
+                    }
                     break;
                 case "12":
-                    System.out.println("Page 12");
+                    System.out.println("|=============== Delete boat ===============|");
+                    System.out.println("| Enter boat ID and press ENTER to          |");
+                    System.out.println("| continue or press 0 to return.            |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        System.out.println("Enter ID: ");
+                        boatId = Integer.parseInt(scanner.nextLine());
+                        System.out.println("Are you sure you want to remove: ");
+                        System.out.println(boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "?");
+
+                        confirm = scanner.nextLine();
+                        if (confirm.toLowerCase().equals("yes")) {
+                            reg.getMember(id).getBoats().remove(boatId);
+                        }
+                        else if(confirm.toLowerCase().equals("no")) {
+                            System.out.println("The boat was not deleted.");
+                            page = "8";
+                        }
+                        else {
+                            System.err.println("The boat was not deleted, you can only write yes or no. Try again.");
+                        }
+
+                    }
+                    else{
+                        page = "0";
+                    }
                     break;
                 case "13":
                     System.out.println("Page 13");
