@@ -26,7 +26,6 @@ public class Member {
 
     public void addBoat(Boat b){
         boats.add(b);
-        System.out.println(b.getType()+" was added to "+this.getName());
     }
 
     public ArrayList<Boat> getBoats(){ return boats; }
