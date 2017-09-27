@@ -1,7 +1,6 @@
 import Back.Boat;
 import Back.Member;
 import Back.Registry;
-import com.sun.org.apache.xpath.internal.SourceTree;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -34,7 +33,15 @@ public class Main {
                     System.out.println("| 6. Save registry                          |");
                     System.out.println("| 7. Exit                                   |");
                     System.out.println("|===========================================|");
-                    page = scanner.nextLine();
+                    System.out.print(":");
+                    confirm = scanner.nextLine();
+
+                    if (confirm.equals("1") || confirm.equals("2") || confirm.equals("3") || confirm.equals("4") || confirm.equals("5") || confirm.equals("") || confirm.equals("7")) {
+                        page = confirm;
+                    }
+                    else {
+                        System.err.println("You can only press one of the keys listed above, try again.");
+                    }
                     break;
                 case "1":
                     System.out.println("|================ Add Member ===============|");
@@ -222,7 +229,7 @@ public class Main {
                         System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
                         boatType = scanner.nextLine();
                         //boatType.substring(0,1).toUpperCase().substring(1, boatType.length() - 1).toLowerCase();
-                        System.out.print("Enter boat length: ");
+                        System.out.print("Enter boat length(cm): ");
                         boatLength = scanner.nextLine();
 
                         System.out.println("Add boat to member? Yes/No");
@@ -230,6 +237,7 @@ public class Main {
                         if (confirm.toLowerCase().equals("yes")) {
                             Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
                             reg.getMember(id).addBoat(boat);
+                            System.out.println(reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm) was added");
                         }
                         else if(confirm.toLowerCase().equals("no")) {
                             System.out.println("Boat was not added.");
@@ -253,14 +261,32 @@ public class Main {
                     if (!scanner.nextLine().equals("0")) {
                         System.out.println("Enter ID: ");
                         boatId = Integer.parseInt(scanner.nextLine());
+                        String oldType = "" +reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)";
 
-                        System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
-                        boatType = scanner.nextLine();
-                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
 
-                        System.out.print("Enter boat length: ");
-                        boatLength = scanner.nextLine();
-                        reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
+                        System.out.println("Are you sure you want to edit "+reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)"+"? Yes/No");
+                        confirm = scanner.nextLine();
+                        if (confirm.toLowerCase().equals("yes")) {
+                            System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+                            boatType = scanner.nextLine();
+                            System.out.print("Enter boat length(cm): ");
+                            boatLength = scanner.nextLine();
+
+                            reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
+                            reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
+                            System.out.println(oldType+" was changed to "+reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)");
+                        }
+                        else if(confirm.toLowerCase().equals("no")) {
+                            System.out.println(oldType+" was not edited.");
+                            page = "8";
+                        }
+                        else {
+                            System.err.println(oldType+"was not deleted, you can only write yes or no. Try again.");
+                        }
+
+
+
+
 
                     }
                     else {
@@ -277,8 +303,8 @@ public class Main {
                     if (!scanner.nextLine().equals("0")) {
                         System.out.println("Enter ID: ");
                         boatId = Integer.parseInt(scanner.nextLine());
-                        System.out.println("Are you sure you want to remove: ");
-                        System.out.println(boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "?");
+                        System.out.println("Are you sure you want to remove: "+boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "cm ?");
+
 
                         confirm = scanner.nextLine();
                         if (confirm.toLowerCase().equals("yes")) {
