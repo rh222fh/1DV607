@@ -2,7 +2,6 @@ import Back.Boat;
 import Back.Member;
 import Back.Registry;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -130,15 +129,15 @@ public class Main {
                 case "8":
                     if (reg.memberExists(id)) {
 
-                        System.out.println("|============== Member:  " + id + " ==============|");
+                        System.out.println("|============== Member: " + id + " ===============|");
                         System.out.println("| Select a number to get to the             |");
                         System.out.println("| corresponding page.                       |");
-                        System.out.println("| 9. Edit member                            |");
+                        System.out.println("| 9.  Edit member                           |");
                         System.out.println("| 10. Add boat                              |");
                         System.out.println("| 11. Edit boat                             |");
                         System.out.println("| 12. Delete boat                           |");
                         System.out.println("| 13. Delete member                         |");
-                        System.out.println("| 0. Return                                 |");
+                        System.out.println("| 0.  Return                                |");
                         System.out.println("|===========================================|");
                         input = scanner.nextLine();
                         if (!input.equals("0")) {
@@ -213,7 +212,7 @@ public class Main {
                         }
                     }
                     else {
-                        page = "0";
+                        page = "8";
                     }
                     break;
                 case "10":
@@ -237,7 +236,7 @@ public class Main {
                         if (confirm.toLowerCase().equals("yes")) {
                             Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
                             reg.getMember(id).addBoat(boat);
-                            System.out.println(reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm) was added");
+                            System.out.println(boat.getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm) was added");
                         }
                         else if(confirm.toLowerCase().equals("no")) {
                             System.out.println("Boat was not added.");
@@ -283,14 +282,9 @@ public class Main {
                         else {
                             System.err.println(oldType+"was not deleted, you can only write yes or no. Try again.");
                         }
-
-
-
-
-
                     }
                     else {
-                        page = "0";
+                        page = "8";
                     }
                     break;
                 case "12":
@@ -317,14 +311,10 @@ public class Main {
                         else {
                             System.err.println("The boat was not deleted, you can only write yes or no. Try again.");
                         }
-
                     }
                     else{
                         page = "0";
                     }
-                    break;
-                case "13":
-                    System.out.println("Page 13");
                     break;
             }
         }
