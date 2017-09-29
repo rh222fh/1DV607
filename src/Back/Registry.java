@@ -1,5 +1,8 @@
 package Back;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +96,40 @@ public class Registry {
                 return true;
         }
         return false;
+    }
+
+    public void saveRegistry(String path){
+        int ID;
+        String name;
+        String pNumber;
+        int boatLength;
+        Object boatType;
+        String boatInfo = "";
+        String printer = "";
+
+            try (PrintWriter outputFile = new PrintWriter(new FileWriter(path, true))) {
+                for (Member m : members) {
+                    printer += m.getName() + "%" + m.getPersonalNumber() + "%%" + m.getId() + "%%%";
+                    for (int i = 0; i <= m.countBoats(); i++) {
+                        boatType = m.getBoats().get(i).getType();
+                        boatLength = m.getBoats().get(i).getLength();
+
+                        printer += m.getBoats().get(i).getType() + "%%%%" + m.getBoats().get(i).getLength() + "%%%%%";
+                    }
+                    outputFile.println(printer);
+                    printer = "";
+
+                }
+            } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadRegistry(String path){
+
+
+
+
     }
 
 
