@@ -1,8 +1,6 @@
 package Back;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +12,6 @@ public class Registry {
     public void addMember(Member m){
        members.add(m);
        m.setId(generateId(m));
-       System.out.println(m.getName()+"(Id="+m.getId()+") "+"added to registry");
     }
 
     public int generateId(Member m){
@@ -99,22 +96,14 @@ public class Registry {
     }
 
     public void saveRegistry(String path){
-        int ID;
-        String name;
-        String pNumber;
-        int boatLength;
-        Object boatType;
-        String boatInfo = "";
         String printer = "";
-
             try (PrintWriter outputFile = new PrintWriter(new FileWriter(path, true))) {
                 for (Member m : members) {
                     printer += m.getName() + "%" + m.getPersonalNumber() + "%%" + m.getId() + "%%%";
-                    for (int i = 0; i <= m.countBoats(); i++) {
-                        boatType = m.getBoats().get(i).getType();
-                        boatLength = m.getBoats().get(i).getLength();
-
-                        printer += m.getBoats().get(i).getType() + "%%%%" + m.getBoats().get(i).getLength() + "%%%%%";
+                    if(!m.getBoats().isEmpty()) {
+                        for (int i = 0; i < m.countBoats(); i++) {
+                            printer += m.getBoats().get(i).getType() + "%%%%" + m.getBoats().get(i).getLength() + "%%%%%";
+                        }
                     }
                     outputFile.println(printer);
                     printer = "";
@@ -125,9 +114,76 @@ public class Registry {
         }
     }
 
-    public void loadRegistry(String path){
+    public void loadRegistry(String path)throws FileNotFoundException {
+        FileInputStream fstream = new FileInputStream(path);
+        BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+        String id="";
+        String name="";
+        String pNumber="";
+        String boatType="";
 
 
+        String strLine;
+        String test = "%";
+        try {
+            while ((strLine = br.readLine()) != null) {
+                System.out.println();
+                String reader = "";
+                int counter = 0;
+                Member m;
+                for (int i = 0; i < strLine.length()+1; i++) {
+
+                    if (counter == 1) {
+                        name=reader;
+                        reader = "";
+                        counter = 0;
+                    } else if (counter == 2) {
+                        pNumber=reader;
+                        reader = "";
+                        counter = 0;
+                    } else if (counter == 3) {
+                        m = new Member(pNumber, name);
+                        this.addMember(m);
+                        m.setId(Integer.valueOf(reader));
+                        id=reader;
+                        reader = "";
+                        counter = 0;
+                    } else if (counter == 4) {
+                        boatType=reader;
+                        reader = "";
+                        counter = 0;
+                    } else if (counter == 5) {
+                        Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(reader));
+                        this.getMember(Integer.valueOf(id)).addBoat(boat);
+                        reader = "";
+                        counter = 0;
+                    }
+                    String start = strLine + "       ";
+                    if (start.charAt(i) == test.charAt(0)) {
+                        counter = 1;
+                        if (start.charAt(i + 1) == test.charAt(0)) {
+                            counter = 2;
+                            i++;
+                            if (start.charAt(i + 1) == test.charAt(0)) {
+                                counter = 3;
+                                i++;
+                                if (start.charAt(i + 1) == test.charAt(0)) {
+                                    counter = 4;
+                                    i++;
+                                    if (start.charAt(i + 1) == test.charAt(0)) {
+                                        counter = 5;
+                                        i++;
+                                    }}}}}else{
+                        if(i != strLine.length()) {
+                            reader += strLine.charAt(i);
+                        }
+                    }}
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
     }
@@ -135,6 +191,11 @@ public class Registry {
 
 
 
-
-
 }
+
+
+
+
+
+
+

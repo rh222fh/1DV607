@@ -2,11 +2,12 @@ import Back.Boat;
 import Back.Member;
 import Back.Registry;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         String name;
         String pNumber;
@@ -35,7 +36,7 @@ public class Main {
                     System.out.print(":");
                     confirm = scanner.nextLine();
 
-                    if (confirm.equals("1") || confirm.equals("2") || confirm.equals("3") || confirm.equals("4") || confirm.equals("5") || confirm.equals("") || confirm.equals("7")) {
+                    if (confirm.equals("1") || confirm.equals("2") || confirm.equals("3") || confirm.equals("4") || confirm.equals("5") || confirm.equals("6") || confirm.equals("7")) {
                         page = confirm;
                     }
                     else {
@@ -61,6 +62,7 @@ public class Main {
                         if (confirm.toLowerCase().equals("yes")) {
                             Member m = new Member(pNumber, name);
                             reg.addMember(m);
+                            System.out.println(m.getName()+"(Id="+m.getId()+") "+"added to registry");
                         }
                         else if(confirm.toLowerCase().equals("no")) {
                             System.out.println("Member was not added.");
@@ -121,8 +123,40 @@ public class Main {
                     }
                     break;
                 case "5":
+                    System.out.println("|============ Load new registry ============|");
+                    System.out.println("| Press ENTER to load a registry            |");
+                    System.out.println("| , press 0 to return to startpage          |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        System.out.println("Write your filepath");
+                        System.out.println("on mac: /Users/test/Desktop/registry.tex");
+                        System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
+                        System.out.println(": ");
+                        String filepath= scanner.nextLine();
+                        reg.loadRegistry(filepath);
+                        System.out.println("Registry was loaded");
+                        page = "0";
+                    }
                     break;
                 case "6":
+                    System.out.println("|============ save new registry ============|");
+                    System.out.println("| Press ENTER to load a registry            |");
+                    System.out.println("| , press 0 to return to startpage          |");
+                    System.out.println("| 0. Return                                 |");
+                    System.out.println("|===========================================|");
+                    System.out.print("Waiting for key press...");
+                    if (!scanner.nextLine().equals("0")) {
+                        System.out.println("Write your filepath and filename");
+                        System.out.println("on mac: /Users/test/Desktop/registry.tex");
+                        System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
+                        System.out.println(": ");
+                        String filepath= scanner.nextLine();
+                        reg.saveRegistry(filepath);
+                        System.out.println("Registry was saved");
+                        page = "0";
+                    }
                     break;
                 case "7":
                     break;
