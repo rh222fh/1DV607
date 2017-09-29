@@ -51,13 +51,13 @@ public class Registry {
         String name;
         int numberOfBoats;
 
-        System.out.printf("%-5s %-10s %-10s\n", "ID", "Name", "Number of Boats");
+        System.out.printf("%-5s %-20s %-10s\n", "ID", "Name", "Number of Boats");
 
         for (Member m: members) {
             ID = m.getId();
             name = m.getName();
             numberOfBoats = m.countBoats();
-            System.out.printf("%-5s %-10s %-10s\n", ID, name, numberOfBoats);
+            System.out.printf("%-5s %-20s %-10s\n", ID, name, numberOfBoats);
         }
     }
 
