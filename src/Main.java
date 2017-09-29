@@ -125,21 +125,16 @@ public class Main {
                 case "5":
                     System.out.println("|============ Load new registry ============|");
                     System.out.println("| Press YES to load a new registry          |");
-                    System.out.println("| Press NO to return                        |");
+                    System.out.println("| Press No to return                        |");
                     System.out.println("|===========================================|");
                     System.out.println("Load new registry? Unsaved data will be lost! "+" Yes/No");
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {
-                            System.out.println("Write your filepath");
-                            System.out.println("on mac: /Users/test/Desktop/registry.tex");
-                            System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
-                            System.out.println(": ");
-                            String filepath= scanner.nextLine();
-                            reg.loadRegistry(filepath);
-                            System.out.println("Registry was loaded");
+                            reg.loadRegistry();
+                            System.out.println("Registry was loaded!");
                             page = "0";
                     }
-                    else if(confirm.toLowerCase().equals("no")) {
+                    else if(confirm.toLowerCase().equals("No")) {
                         page = "0";
                     }
                     else {
@@ -154,12 +149,7 @@ public class Main {
                     System.out.println("Save registry?"+" Yes/No");
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {
-                        System.out.println("Write your filepath and filename");
-                        System.out.println("on mac: /Users/test/Desktop/registry.tex");
-                        System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
-                        System.out.println(": ");
-                        String filepath= scanner.nextLine();
-                        reg.saveRegistry(filepath);
+                        reg.saveRegistry();
                         System.out.println("Registry was saved");
                         page = "0";
                     }
