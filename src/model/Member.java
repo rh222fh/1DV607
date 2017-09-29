@@ -1,6 +1,5 @@
-package Back;
+package model;
 
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 public class Member {
