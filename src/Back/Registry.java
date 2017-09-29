@@ -69,22 +69,22 @@ public class Registry {
         Object boatType;
         String boatInfo = "";
 
-        System.out.printf("%-5s %-20s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
+        System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
 
         for (Member m: members) {
             ID = m.getId();
             name = m.getName();
             pNumber = m.getPersonalNumber();
             if(!m.getBoats().isEmpty()){
-                System.out.printf("%-5s %-20s %-20s %-10s\n", ID, name, pNumber, boatInfo = 0 + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength()+"cm");
+                System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, 0 + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength()+"cm");
                 for (int i = 1; i <m.countBoats(); i++){
                     boatType = m.getBoats().get(i).getType();
                     boatLength = m.getBoats().get(i).getLength();
                     boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
-                    System.out.printf("%-5s %-20s %-20s %-10s\n", "", "", "", boatInfo);
+                    System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
                 }
             }
-            System.out.printf("%-5s %-20s %-20s %-10s\n", "-----", "---------------------", "-------------------", "-------------------------");
+            System.out.printf("%-5s %-20s %-20s %-10s\n", "-----", "----------------------", "--------------------", "-------------------------");
            // System.out.printf("%-5s %-20s %-20s %-10s\n", ID, name, pNumber, boatInfo);
 
         }
