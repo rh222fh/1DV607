@@ -22,7 +22,7 @@ public class Main {
         while (!page.equals("7")) {
             switch (page) {
                 case "0":
-                    System.out.println("|================ Startpage ================|");
+                    System.out.println("|=============== Startpage ================|");
                     System.out.println("| Select a number to get to the             |");
                     System.out.println("| corresponding page.                       |");
                     System.out.println("| 1. Add member(s)                          |");
