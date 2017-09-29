@@ -22,7 +22,7 @@ public class Main {
         while (!page.equals("7")) {
             switch (page) {
                 case "0":
-                    System.out.println("|=============== Startpage ================|");
+                    System.out.println("|================ Startpage ================|");
                     System.out.println("| Select a number to get to the             |");
                     System.out.println("| corresponding page.                       |");
                     System.out.println("| 1. Add member(s)                          |");
@@ -55,23 +55,27 @@ public class Main {
                         name = scanner.nextLine();
                         System.out.print("Enter personal number: ");
                         pNumber = scanner.nextLine();
+                        String clean = pNumber.replaceAll("-", "");
 
-
-                        System.out.println("Add member to registry? Yes/No");
-                        confirm = scanner.nextLine();
-                        if (confirm.toLowerCase().equals("yes")) {
-                            Member m = new Member(pNumber, name);
-                            reg.addMember(m);
-                            System.out.println(m.getName()+"(Id="+m.getId()+") "+"added to registry");
-                        }
-                        else if(confirm.toLowerCase().equals("no")) {
-                            System.out.println("Member was not added.");
+                        if(!clean.matches("\\d+")){
+                            System.err.println("The personal number can only contain digits and \"-\", please try again.");
                             page = "1";
                         }
-                        else {
-                            System.err.println("Member was not added, you can only write yes or no. Try again.");
-                        }
 
+                        else {
+                            System.out.println("Add member to registry? Yes/No");
+                            confirm = scanner.nextLine();
+                            if (confirm.toLowerCase().equals("yes")) {
+                                Member m = new Member(pNumber, name);
+                                reg.addMember(m);
+                                System.out.println(m.getName() + "(Id=" + m.getId() + ") " + "added to registry");
+                            } else if (confirm.toLowerCase().equals("no")) {
+                                System.out.println("Member was not added.");
+                                page = "1";
+                            } else {
+                                System.err.println("Member was not added, you can only write yes or no. Try again.");
+                            }
+                        }
                     }
                     else {
                         page = "0";
