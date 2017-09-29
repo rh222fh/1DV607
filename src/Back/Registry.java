@@ -32,7 +32,6 @@ public class Registry {
 
     public void deleteMember(Member m){
         members.remove(m);
-        System.out.println(m+"deleted from registry");
     }
 
     public Member getMember(int id) {
@@ -115,6 +114,8 @@ public class Registry {
     }
 
     public void loadRegistry(String path)throws FileNotFoundException {
+        this.members.clear();
+
         FileInputStream fstream = new FileInputStream(path);
         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 

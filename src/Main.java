@@ -127,7 +127,7 @@ public class Main {
                     System.out.println("| Press YES to load a new registry          |");
                     System.out.println("| Press NO to return                        |");
                     System.out.println("|===========================================|");
-                    System.out.println("Load new registry? unsaved data will be lost "+" Yes/No");
+                    System.out.println("Load new registry? Unsaved data will be lost! "+" Yes/No");
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {
                             System.out.println("Write your filepath");
