@@ -15,6 +15,8 @@ public class Member {
         name = mName;
     }
 
+    public Member(){}
+
     public void setName(String s){
         name = s;
     }
