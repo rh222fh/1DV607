@@ -40,10 +40,12 @@ public class Console {
         }
         else {
             System.err.println("You can only press one of the keys listed above, try again.");
+            start();
         }
     }
 
     public void pageSwitcher(String s) throws IOException{
+
         if (s.equals("1")) {
             pageOne();
         }
