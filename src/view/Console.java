@@ -394,7 +394,7 @@ public class Console {
 
     }
 
-    public void pageEleven() throws IOException{
+    public void pageEleven() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Edit boat ================|");
         System.out.println("| Enter boat ID and press ENTER to          |");
@@ -404,29 +404,38 @@ public class Console {
         System.out.print("Waiting for key press...");
         if (!scanner.nextLine().equals("0")) {
             System.out.print("Enter ID: ");
-            boatId = Integer.parseInt(scanner.nextLine());
-            String oldType = "" +reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)";
-
-
-            System.out.println("Are you sure you want to edit "+reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)"+"? Yes/No");
-            confirm = scanner.nextLine();
-            if (confirm.toLowerCase().equals("yes")) {
-                System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
-                boatType = scanner.nextLine();
-                System.out.print("Enter boat length(cm): ");
-                boatLength = scanner.nextLine();
-
-                reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
-                reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
-                System.out.println(oldType+" was changed to "+reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)");
-                pageSwitcher("11");
-            }
-            else if(confirm.toLowerCase().equals("no")) {
-                System.out.println(oldType+" was not edited.");
-                pageSwitcher("8");
+            String temp = scanner.nextLine();
+            if (temp.matches("\\d+")) {
+                boatId = Integer.valueOf(temp);
+                if (reg.getMember(id).boatExists(boatId)) {
+                    boatId = Integer.parseInt(scanner.nextLine());
+                    String oldType = "" + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)";
+                    System.out.println("Are you sure you want to edit " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)" + "? Yes/No");
+                    confirm = scanner.nextLine();
+                    if (confirm.toLowerCase().equals("yes")) {
+                        System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+                        boatType = scanner.nextLine();
+                        System.out.print("Enter boat length(cm): ");
+                        boatLength = scanner.nextLine();
+                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
+                        reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
+                        System.out.println(oldType + " was changed to " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)");
+                        pageSwitcher("11");
+                    } else if (confirm.toLowerCase().equals("no")) {
+                        System.out.println(oldType + " was not edited.");
+                        pageSwitcher("8");
+                    } else {
+                        System.err.println(oldType + "was not deleted, you can only write yes or no. Try again.");
+                    }
+                }
+                else {
+                    System.err.println("The boat that you are trying to delete doesn't exist, please try again.");
+                    pageSwitcher("12");
+                }
             }
             else {
-                System.err.println(oldType+"was not deleted, you can only write yes or no. Try again.");
+                System.err.println("You must type in a number, please try again.");
+                pageSwitcher("11");
             }
         }
         else {
