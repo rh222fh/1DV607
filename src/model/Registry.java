@@ -1,8 +1,6 @@
 package model;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -40,8 +38,6 @@ public class Registry {
         return null;
     }
 
-    public ArrayList getList(){return  members;}
-
     public void printCompactList(){
         int ID;
         String name;
@@ -63,7 +59,7 @@ public class Registry {
         String pNumber;
         int boatLength;
         Object boatType;
-        String boatInfo = "";
+        String boatInfo;
 
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
 
@@ -103,21 +99,19 @@ public class Registry {
         System.out.println("on windows: \\Users\\test\\Desktop\\registry.txt");
         System.out.print(": ");
         String filepath= scanner.nextLine();
-        Path file = Paths.get(filepath);
-        String printer = "";
-        File f = new File(filepath);
+        StringBuilder printer = new StringBuilder();
         if(filepath.matches(".*.txt")) {
             try {
                 PrintWriter outputFile = new PrintWriter(new FileOutputStream(filepath, true));
                 for (Member m : members) {
-                    printer += m.getName() + "%" + m.getPersonalNumber() + "%%" + m.getId() + "%%%";
+                    printer.append(m.getName()).append("%").append(m.getPersonalNumber()).append("%%").append(m.getId()).append("%%%");
                     if (!m.getBoats().isEmpty()) {
                         for (int i = 0; i < m.countBoats(); i++) {
-                            printer += m.getBoats().get(i).getType() + "%%%%" + m.getBoats().get(i).getLength() + "%%%%%";
+                            printer.append(m.getBoats().get(i).getType()).append("%%%%").append(m.getBoats().get(i).getLength()).append("%%%%%");
                         }
                     }
                     outputFile.println(printer);
-                    printer = "";
+                    printer = new StringBuilder();
 
                 }
             } catch (IOException e1) {

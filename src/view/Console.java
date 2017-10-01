@@ -14,7 +14,6 @@ public class Console {
     private String input;
     private int boatId = 0;
     private Registry reg = new Registry();
-    private String page = "0";
     private String confirm;
     private String boatType = "";
     private String boatLength;
@@ -44,7 +43,7 @@ public class Console {
         }
     }
 
-    public void pageSwitcher(String s) throws IOException{
+    private void pageSwitcher(String s) throws IOException{
 
         if (s.equals("1")) {
             pageOne();
@@ -89,7 +88,7 @@ public class Console {
         }
     }
 
-    public void pageOne() throws IOException {
+    private void pageOne() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Add Member ===============|");
         System.out.println("| Enter member information and press        |");
@@ -134,7 +133,7 @@ public class Console {
         }
     }
 
-    public void pageTwo() throws IOException{
+    private void pageTwo() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============== Select member ==============|");
         System.out.println("| Enter member ID and press ENTER to        |");
@@ -166,7 +165,7 @@ public class Console {
 
     }
 
-    public void pageThree() throws IOException{
+    private void pageThree() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show verbose list ============|");
         System.out.println("| Press ENTER to show a verbose list of all |");
@@ -183,7 +182,7 @@ public class Console {
 
     }
 
-    public void pageFour() throws IOException{
+    private void pageFour() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show compact list ============|");
         System.out.println("| Press ENTER to show a compact list of all |");
@@ -199,7 +198,7 @@ public class Console {
         }
     }
 
-    public void pageFive() throws IOException{
+    private void pageFive() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("|============ Load new registry ============|");
@@ -223,7 +222,7 @@ public class Console {
 
     }
 
-    public void pageSix() throws IOException{
+    private void pageSix() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Save new registry ============|");
         System.out.println("| Press YES to save registry                |");
@@ -246,7 +245,7 @@ public class Console {
 
     }
 
-    public void pageSeven() throws IOException{
+    private void pageSeven() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you sure that you want to exit? Yes/No");
         confirm = scanner.nextLine();
@@ -261,7 +260,7 @@ public class Console {
         }
     }
 
-    public void pageEight() throws IOException{
+    private void pageEight() throws IOException{
         Scanner scanner = new Scanner(System.in);
         if (reg.memberExists(id)) {
 
@@ -306,7 +305,7 @@ public class Console {
         }
     }
 
-    public void pageNine() throws IOException{
+    private void pageNine() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|========== Edit member:  "+ id +" =========|");
         System.out.println("| Select a number to get to the             |");
@@ -352,7 +351,7 @@ public class Console {
         }
     }
 
-    public void pageTen() throws IOException{
+    private void pageTen() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("|================= Add Boat ================|");
@@ -395,7 +394,7 @@ public class Console {
 
     }
 
-    public void pageEleven() throws IOException {
+    private void pageEleven() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Edit boat ================|");
         System.out.println("| Enter boat ID and press ENTER to          |");
@@ -444,7 +443,7 @@ public class Console {
         }
     }
 
-    public void pageTwelve() throws IOException{
+    private void pageTwelve() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|=============== Delete boat ===============|");
         System.out.println("| Enter boat ID and press ENTER to          |");

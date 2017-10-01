@@ -75,7 +75,7 @@ public class Member {
      * Method for counting boats
      * @return Returns the number of boats for a specific member
      */
-    public int countBoats(){
+    int countBoats(){
         return boats.size();
     }
 
@@ -91,7 +91,7 @@ public class Member {
      * Method for getting a members personal number
      * @return Returns a specific members personal number
      */
-    public String getPersonalNumber(){
+    String getPersonalNumber(){
         return pNumber;
     }
 
@@ -104,8 +104,7 @@ public class Member {
     /**
      * Method for setting a members id
      * @param id Specifies the id for a member
-     * @return Returns id for a specific member
      */
-    public void setId(Integer id){this.id = id;}
+    void setId(Integer id){this.id = id;}
 
 }
