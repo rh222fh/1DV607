@@ -101,7 +101,7 @@ public class Registry {
         System.out.println("Write your filepath and filename");
         System.out.println("on mac: /Users/test/Desktop/registry.txt");
         System.out.println("on windows: \\Users\\test\\Desktop\\registry.txt");
-        System.out.println(": ");
+        System.out.print(": ");
         String filepath= scanner.nextLine();
         Path file = Paths.get(filepath);
         String printer = "";
@@ -136,11 +136,11 @@ public class Registry {
         System.out.println("Write your filepath");
         System.out.println("on mac: /Users/test/Desktop/registry.tex");
         System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
-        System.out.println(": ");
+        System.out.print(": ");
         String filepath= scanner.nextLine();
         File f = new File(filepath);
 
-        if (f.exists()) {
+        if (f.exists() && filepath.matches(".*.txt")) {
             FileInputStream fstream = new FileInputStream(filepath);
             BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
