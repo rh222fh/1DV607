@@ -42,7 +42,7 @@ public class Registry {
 
     public ArrayList getList(){return  members;}
 
-    public void printCompactList(){
+    public void getCompactList(){
         int ID;
         String name;
         int numberOfBoats;
@@ -57,7 +57,7 @@ public class Registry {
         }
     }
 
-    public void printVerboseList(){
+    public void getVerboseList(){
         int ID;
         String name;
         String pNumber;

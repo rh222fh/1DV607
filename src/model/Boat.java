@@ -5,7 +5,7 @@ package model;
  */
 public class Boat {
 
-    /* Fields */
+    /** Fields */
     private Type bt;
     private int length;
 
