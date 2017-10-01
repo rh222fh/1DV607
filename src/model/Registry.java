@@ -1,20 +1,28 @@
 package model;
 
 import java.io.*;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Registry {
 
+    /** Fields */
     private ArrayList<Member> members = new ArrayList<>();
 
+    /**
+     * Method for adding a member
+     * @param m Specifies a specific member
+     */
     public void addMember(Member m){
        members.add(m);
        m.setId(generateId(m));
     }
 
+    /**
+     * Method for generating a random Id
+     * @param m Specifies a specific member
+     * @return Returns a random Id
+     */
     private int generateId(Member m){
         int id = (int)(Math.random()*9000)+1000;
         for (int i = 0; i <members.size() ; i++) {
@@ -26,10 +34,19 @@ public class Registry {
         return id;
     }
 
+    /**
+     * Method for removing a member from array list members
+     * @param m Specifies a specific member
+     */
     public void deleteMember(Member m){
         members.remove(m);
     }
 
+    /**
+     * Method for getting member
+     * @param id Specifies a specific member Id
+     * @return Returns member corresponding to Id, otherwise prints message and returns null
+     */
     public Member getMember(int id) {
         for (Member m : members) {
             if (id == m.getId()) {
@@ -40,8 +57,9 @@ public class Registry {
         return null;
     }
 
-    public ArrayList getList(){return  members;}
-
+    /**
+     * Method for printing compact list
+     */
     public void getCompactList(){
         int ID;
         String name;
@@ -57,13 +75,16 @@ public class Registry {
         }
     }
 
+    /**
+     * Method for printing verbose list
+     */
     public void getVerboseList(){
         int ID;
         String name;
         String pNumber;
         int boatLength;
         Object boatType;
-        String boatInfo = "";
+        String boatInfo;
 
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
 
@@ -88,6 +109,11 @@ public class Registry {
         }
     }
 
+    /**
+     * Method for checking if a specific member exists
+     * @param id Specifies a member id
+     * @return Returns true if member exists, otherwise returns false
+     */
     public boolean memberExists(int id) {
         for (Member m: members) {
             if (id == m.getId())
@@ -96,6 +122,9 @@ public class Registry {
         return false;
     }
 
+    /**
+     * Method for saving registry
+     */
     public void saveRegistry(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your filepath and filename");
@@ -103,21 +132,19 @@ public class Registry {
         System.out.println("on windows: \\Users\\test\\Desktop\\registry.txt");
         System.out.println(": ");
         String filepath= scanner.nextLine();
-        Path file = Paths.get(filepath);
-        String printer = "";
-        File f = new File(filepath);
+        StringBuilder printer = new StringBuilder();
         if(filepath.matches(".*.txt")) {
             try {
                 PrintWriter outputFile = new PrintWriter(new FileOutputStream(filepath, true));
                 for (Member m : members) {
-                    printer += m.getName() + "%" + m.getPersonalNumber() + "%%" + m.getId() + "%%%";
+                    printer.append(m.getName()).append("%").append(m.getPersonalNumber()).append("%%").append(m.getId()).append("%%%");
                     if (!m.getBoats().isEmpty()) {
                         for (int i = 0; i < m.countBoats(); i++) {
-                            printer += m.getBoats().get(i).getType() + "%%%%" + m.getBoats().get(i).getLength() + "%%%%%";
+                            printer.append(m.getBoats().get(i).getType()).append("%%%%").append(m.getBoats().get(i).getLength()).append("%%%%%");
                         }
                     }
                     outputFile.println(printer);
-                    printer = "";
+                    printer = new StringBuilder();
 
                 }
             } catch (IOException e1) {
@@ -131,6 +158,9 @@ public class Registry {
     }
 
 
+    /**
+     * Method for loading registry
+     */
     public void loadRegistry()throws FileNotFoundException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Write your filepath");
