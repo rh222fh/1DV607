@@ -1,7 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-
 public class Member {
 
     private String pNumber;
@@ -30,6 +29,15 @@ public class Member {
     }
 
     public ArrayList<Boat> getBoats(){ return boats; }
+
+    public boolean boatExists(int id) {
+        for (int i = 0; i < boats.size(); i++) {
+            if (id == i) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     public int countBoats(){
         return boats.size();
