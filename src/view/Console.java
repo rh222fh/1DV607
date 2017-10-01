@@ -100,10 +100,13 @@ public class Console {
         if (!scanner.nextLine().equals("0")) {
             System.out.print("Enter name: ");
             name = scanner.nextLine();
+            if (name.isEmpty() || name.matches("\\d+")) {
+                System.err.println("The name can't be empty or contain digits, please try again.");
+                pageSwitcher("1");
+            }
             System.out.print("Enter personal number: ");
             pNumber = scanner.nextLine();
             String clean = pNumber.replaceAll("-", "");
-
             if(!clean.matches("\\d+")){
                 System.err.println("The personal number can only contain digits and \"-\", please try again.");
                 pageSwitcher("1");
