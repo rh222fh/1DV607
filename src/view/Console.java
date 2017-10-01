@@ -254,38 +254,25 @@ public class Console {
             System.out.println("|===========================================|");
             input = scanner.nextLine();
             while (!input.equals("0")) {
-                switch (input) {
-                    case "9":
-                        pageSwitcher("9");
-                        break;
-                    case "10":
-                        pageSwitcher("10");
-                        break;
-                    case "11":
-                        pageSwitcher("11");
-                        break;
-                    case "12":
-                        pageSwitcher("12");
-                        break;
-                    case "13":
-                        System.out.println("Are you sure that you want to delete " + reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ")" + " Yes/No");
-                        confirm = scanner.nextLine();
-                        if (confirm.toLowerCase().equals("yes")) {
-                            reg.deleteMember(reg.getMember(id));
-                            System.out.println("Member " + "id " + "was deleted.");
-                            start();
-                        } else if (confirm.toLowerCase().equals("no")) {
-                            System.out.println(reg.getMember(id).getName() + " was not deleted.");
-                            pageSwitcher("8");
-                        } else {
-                            System.err.println("Member was not deleted, you can only write yes or no. Try again.");
-                            input = "13";
-                        }
-                        break;
-                    default:
-                        System.err.println("You can only press one of the keys listed above, try again.");
-                        pageSwitcher("8");
-                        break;
+                   if(input.equals("13")) {
+                       System.out.println("Are you sure that you want to delete " + reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ")" + " Yes/No");
+                       confirm = scanner.nextLine();
+                       if (confirm.toLowerCase().equals("yes")) {
+                           reg.deleteMember(reg.getMember(id));
+                           System.out.println("Member " + "id " + "was deleted.");
+                           start();
+                       } else if (confirm.toLowerCase().equals("no")) {
+                           System.out.println(reg.getMember(id).getName() + " was not deleted.");
+                           pageSwitcher("8");
+                       } else {
+                           System.err.println("Member was not deleted, you can only write yes or no. Try again.");
+                           input = "13";
+                       }
+                   }else if(input.matches("\\d+")&&(Integer.valueOf(input)<=13 && Integer.valueOf(input)>=9)){
+                       pageSwitcher(input);
+                   }else{
+                       System.err.println("You can only press on of the pages listed above. Try again.");
+                       pageEight();
                 }
             }
             start();
@@ -421,8 +408,6 @@ public class Console {
             System.out.println("Enter ID: ");
             boatId = Integer.parseInt(scanner.nextLine());
             System.out.println("Are you sure you want to remove: "+boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "cm ?");
-
-
             confirm = scanner.nextLine();
             if (confirm.toLowerCase().equals("yes")) {
                 reg.getMember(id).getBoats().remove(boatId);
@@ -438,7 +423,7 @@ public class Console {
             }
         }
         else{
-            start();
+            pageEight();
         }
     }
 }
