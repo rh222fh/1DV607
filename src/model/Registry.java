@@ -85,6 +85,8 @@ public class Registry {
                     boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
                     System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
                 }
+            }else{
+                System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
             }
             System.out.printf("%-5s %-20s %-20s %-10s\n", "-----", "----------------------", "--------------------", "-------------------------");
            // System.out.printf("%-5s %-20s %-20s %-10s\n", ID, name, pNumber, boatInfo);
