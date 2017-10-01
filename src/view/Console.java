@@ -308,14 +308,25 @@ public class Console {
                 case "1":
                     System.out.print("Enter name: ");
                     name = scanner.nextLine();
-                    reg.getMember(id).setName(name);
-                    pageSwitcher("9");
+                    if (name.isEmpty() || name.matches("\\d+")) {
+                        System.err.println("The name can't be empty or contain digits, please try again.");
+                        pageSwitcher("9");
+                    }else {
+
+                        reg.getMember(id).setName(name);
+                        pageSwitcher("9");
+                    }
                     break;
                 case "2":
                     System.out.print("Enter personal number: ");
                     pNumber = scanner.nextLine();
-                    reg.getMember(id).setPersonalNumber(pNumber);
-                    pageSwitcher("9");
+                    if(!pNumber.matches("\\d+")){
+                        System.err.println("The personal number can only contain digits and \"-\", please try again.");
+                        pageSwitcher("9");
+                    }else{
+                        reg.getMember(id).setPersonalNumber(pNumber);
+                        pageSwitcher("9");
+                    }
                     break;
                 default:
                     System.err.println("You can only press one of the keys listed above, try again.");
