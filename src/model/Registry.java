@@ -8,15 +8,14 @@ import java.util.Scanner;
 
 public class Registry {
 
-    public ArrayList<Member> members = new ArrayList<Member>();
-    public int countId;
+    private ArrayList<Member> members = new ArrayList<>();
 
     public void addMember(Member m){
        members.add(m);
        m.setId(generateId(m));
     }
 
-    public int generateId(Member m){
+    private int generateId(Member m){
         int id = (int)(Math.random()*9000)+1000;
         for (int i = 0; i <members.size() ; i++) {
             if (m.getId() == id){
@@ -25,11 +24,6 @@ public class Registry {
             }
         }
         return id;
-    }
-
-    public void changeMember(int id, String name, String pNumber){
-        getMember(id).setName(name);
-        getMember(id).setPersonalNumber(pNumber);
     }
 
     public void deleteMember(Member m){
