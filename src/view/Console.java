@@ -143,9 +143,22 @@ public class Console {
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
         if (!scanner.nextLine().equals("0")) {
-            System.out.println("Enter ID: ");
-            id = Integer.parseInt(scanner.nextLine());
-            pageSwitcher("8");
+            System.out.print("Enter ID: ");
+            String temp = scanner.nextLine();
+            if (temp.matches("\\d+")) {
+                id = Integer.valueOf(temp);
+                if (reg.memberExists(id)) {
+                    pageSwitcher("8");
+                } else {
+                    System.err.println("A member with id: " + id + " doesn't exist, please try again.");
+                    pageSwitcher("2");
+                }
+            }
+            else {
+                System.err.println("The id must be an integer, please try again. ");
+                pageSwitcher("2");
+            }
+
         }
         else {
             start();
@@ -386,7 +399,7 @@ public class Console {
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
         if (!scanner.nextLine().equals("0")) {
-            System.out.println("Enter ID: ");
+            System.out.print("Enter ID: ");
             boatId = Integer.parseInt(scanner.nextLine());
             String oldType = "" +reg.getMember(id).getBoats().get(boatId).getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm)";
 
@@ -426,7 +439,7 @@ public class Console {
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
         if (!scanner.nextLine().equals("0")) {
-            System.out.println("Enter ID: ");
+            System.out.print("Enter ID: ");
             String temp = scanner.nextLine();
             if (temp.matches("\\d+")) {
                 boatId = Integer.valueOf(temp);
