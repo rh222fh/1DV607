@@ -363,31 +363,35 @@ public class Console {
         System.out.print("Waiting for key press...");
         if (!scanner.nextLine().equals("0")) {
             System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
-            boatType = scanner.nextLine();
-            //boatType.substring(0,1).toUpperCase().substring(1, boatType.length() - 1).toLowerCase();
-            System.out.print("Enter boat length(cm): ");
-            boatLength = scanner.nextLine();
+            boatType = scanner.nextLine().toLowerCase();
+            if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")){
+                System.out.print("Enter boat length(cm): ");
+                boatLength = scanner.nextLine();
+                if(boatLength.matches("\\d+")) {
+                    System.out.println("Add boat to member? Yes/No");
+                    confirm = scanner.nextLine();
+                    if (confirm.toLowerCase().equals("yes")) {
+                        Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
+                        reg.getMember(id).addBoat(boat);
+                        System.out.println(boatType + "(" +boatLength + "cm) was added");
+                        pageSwitcher("10");
+                    } else if (confirm.toLowerCase().equals("no")) {
+                        System.out.println("Boat was not added.");
+                        pageSwitcher("10");
+                    } else {
+                        System.err.println("Boat was not added, you can only write yes or no. Try again.");
+                        pageSwitcher("10");
+                    }
+                }else{
 
-            System.out.println("Add boat to member? Yes/No");
-            confirm = scanner.nextLine();
-            if (confirm.toLowerCase().equals("yes")) {
-                Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
-                reg.getMember(id).addBoat(boat);
-                System.out.println(boat.getType()+"("+reg.getMember(id).getBoats().get(boatId).getLength()+"cm) was added");
+                }
+            }else{
+                System.err.println("Boat was not added, cant add boat of type "+boatType+". Try again.");
                 pageSwitcher("10");
-            }
-            else if(confirm.toLowerCase().equals("no")) {
-                System.out.println("Boat was not added.");
-                pageSwitcher("10");
-            }
-            else {
-                System.err.println("Boat was not added, you can only write yes or no. Try again.");
-                pageSwitcher("10");
-            }
-        }
-        else {
+            }}else {
             pageSwitcher("8");
         }
+
     }
 
     public void pageEleven() throws IOException{
