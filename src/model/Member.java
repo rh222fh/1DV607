@@ -75,7 +75,8 @@ public class Member {
      * Method for counting boats
      * @return Returns the number of boats for a specific member
      */
-   public int countBoats(){
+
+    int countBoats(){
         return boats.size();
     }
 
