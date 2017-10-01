@@ -235,9 +235,10 @@ public class Console {
 
     public void pageSeven() throws IOException{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Are you sure that you want to delete exit? Yes/No");
+        System.out.println("Are you sure that you want to exit? Yes/No");
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {
+            System.out.println("Stopping program....");
             System.exit(0);
         } else if (confirm.toLowerCase().equals("no")) {
             start();
