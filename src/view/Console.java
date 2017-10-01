@@ -383,7 +383,8 @@ public class Console {
                         pageSwitcher("10");
                     }
                 }else{
-
+                    System.err.println("Boat was not added, lenght must be digits. Try again.");
+                    pageSwitcher("10");
                 }
             }else{
                 System.err.println("Boat was not added, cant add boat of type "+boatType+". Try again.");
