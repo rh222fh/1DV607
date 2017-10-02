@@ -7,7 +7,11 @@ import model.Registry;
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * Class that represents the console display
+ */
 public class Console {
+    /** Fields */
     private String name;
     private String pNumber;
     private int id = 0;
@@ -18,9 +22,12 @@ public class Console {
     private String boatType = "";
     private String boatLength;
 
+    /**
+     * Method that displays the start page alternatives to the user
+     */
     public void start() throws IOException{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("|================ Startpage ================|");
+        System.out.println("|=============== Start page ================|");
         System.out.println("| Select a number to get to the             |");
         System.out.println("| corresponding page.                       |");
         System.out.println("| 1. Add member(s)                          |");
@@ -43,6 +50,10 @@ public class Console {
         }
     }
 
+    /**
+     * Method that switches cases with the number given in console
+     * @param s Specifies the given page number
+     */
     private void pageSwitcher(String s) throws IOException{
         switch (s) {
             case "1": // Add member
@@ -87,6 +98,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the add member function to the user
+     */
     private void pageOne() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Add Member ===============|");
@@ -132,6 +146,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the select member function to the user
+     */
     private void pageTwo() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============== Select member ==============|");
@@ -164,6 +181,9 @@ public class Console {
 
     }
 
+    /**
+     * Method for displaying the verbose list to the user
+     */
     private void pageThree() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show verbose list ============|");
@@ -172,15 +192,18 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {  /*User didnt press return. Showing verbose list*/
+        if (!scanner.nextLine().equals("0")) {  /*User didn't press return. Showing verbose list*/
             reg.printVerboseList();
-            System.out.print("Press any key to return to startpage....");   /*Waiting for key press to return to startpage*/
+            System.out.print("Press any key to return to startpage....");   /*Waiting for key press to return to start page*/
             scanner.nextLine();
             start();
         }
 
     }
 
+    /**
+     * Method for displaying the compact list to the user
+     */
     private void pageFour() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show compact list ============|");
@@ -197,6 +220,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method displaying the function to load a registry
+     */
     private void pageFive() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -221,6 +247,9 @@ public class Console {
 
     }
 
+    /**
+     * Method displaying the function to save a registry
+     */
     private void pageSix() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Save new registry ============|");
@@ -244,6 +273,9 @@ public class Console {
 
     }
 
+    /**
+     * Method that displays the option to exit the software to the user
+     */
     private void pageSeven() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you sure that you want to exit? Yes/No");
@@ -251,7 +283,7 @@ public class Console {
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to exit program*/
             System.out.println("Stopping program....");
             System.exit(0);
-        } else if (confirm.toLowerCase().equals("no")) {    /*User didnt want to exit program. return to startpage*/
+        } else if (confirm.toLowerCase().equals("no")) {    /*User didn't want to exit program. return to start page*/
             start();
         } else {            /*User typed wrong, yes/no*/
             System.err.println("You can only write yes or no. Try again.");
@@ -259,6 +291,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the options for a specific member to the user
+     */
     private void pageEight() throws IOException{/*Select member*/
         Scanner scanner = new Scanner(System.in);
         if (reg.memberExists(id)) {/*Checking if user exist*/
@@ -310,6 +345,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the options for editing a specific member to the user
+     */
     private void pageNine() throws IOException{/*Edit member*/
         Scanner scanner = new Scanner(System.in);
 
@@ -356,6 +394,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that display the function for adding a boat to the user
+     */
     private void pageTen() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -399,6 +440,9 @@ public class Console {
 
     }
 
+    /**
+     * Method that displays the function for editing a specific boat
+     */
     private void pageEleven() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Edit boat ================|");
@@ -458,6 +502,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the function for deleting a specific boat
+     */
     private void pageTwelve() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|=============== Delete boat ===============|");
@@ -503,6 +550,9 @@ public class Console {
         }
     }
 
+    /**
+     * Method that displays the information of a specific member to the user
+     */
     private void pageFourteen() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|========== Member " + id + " info =========|");
