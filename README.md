@@ -1,6 +1,6 @@
 # 1DV607
 
-Instructions to run our program
+## Instructions to run our program ##
 =======================
 1. You need to have java installed on your computer
 2.(Windows) just run YachtClub.exe
