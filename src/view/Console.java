@@ -408,19 +408,29 @@ public class Console {
             if (temp.matches("\\d+")) {
                 boatId = Integer.valueOf(temp);
                 if (reg.getMember(id).boatExists(boatId)) {
-                    boatId = Integer.parseInt(scanner.nextLine());
+                    boatId = Integer.parseInt(temp);
                     String oldType = "" + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)";
                     System.out.println("Are you sure you want to edit " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)" + "? Yes/No");
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {
                         System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
                         boatType = scanner.nextLine();
-                        System.out.print("Enter boat length(cm): ");
-                        boatLength = scanner.nextLine();
-                        reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
-                        reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
-                        System.out.println(oldType + " was changed to " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)");
-                        pageSwitcher("11");
+                        if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")) {
+                            System.out.print("Enter boat length(cm): ");
+                            boatLength = scanner.nextLine();
+                            if(boatLength.matches("\\d+")) {
+                                reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
+                                reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
+                                System.out.println(oldType + " was changed to " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)");
+                                pageSwitcher("11");
+                            }else{
+                                System.err.println("Boat was not added, lenght must be digits. Try again.");
+                                pageSwitcher("11");
+                            }
+                        }else{
+                            System.err.println("Boat was not added, cant add boat of type "+boatType+". Try again.");
+                            pageSwitcher("11");
+                        }
                     } else if (confirm.toLowerCase().equals("no")) {
                         System.out.println(oldType + " was not edited.");
                         pageSwitcher("8");
