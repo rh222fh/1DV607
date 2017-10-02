@@ -44,47 +44,46 @@ public class Console {
     }
 
     private void pageSwitcher(String s) throws IOException{
-
-        if (s.equals("1")) {
-            pageOne();
-        }
-        if (s.equals("2")) {
-            pageTwo();
-        }
-        if (s.equals("3")) {
-            pageThree();
-        }
-        if (s.equals("4")) {
-            pageFour();
-        }
-        if (s.equals("5")) {
-            pageFive();
-        }
-        if (s.equals("6")) {
-            pageSix();
-        }
-        if (s.equals("7")) {
-            pageSeven();
-        }
-
-        if (s.equals("8")) {
-            pageEight();
-        }
-
-        if (s.equals("9")) {
-            pageNine();
-        }
-
-        if (s.equals("10")) {
-            pageTen();
-        }
-
-        if (s.equals("11")) {
-            pageEleven();
-        }
-
-        if (s.equals("12")) {
-            pageTwelve();
+        switch (s) {
+            case "1":
+                pageOne();
+                break;
+            case "2":
+                pageTwo();
+                break;
+            case "3":
+                pageThree();
+                break;
+            case "4":
+                pageFour();
+                break;
+            case "5":
+                pageFive();
+                break;
+            case "6":
+                pageSix();
+                break;
+            case "7":
+                pageSeven();
+                break;
+            case "8":
+                pageEight();
+                break;
+            case "9":
+                pageNine();
+                break;
+            case "10":
+                pageTen();
+                break;
+            case "11":
+                pageEleven();
+                break;
+            case "12":
+                pageTwelve();
+                break;
+            case "14":
+                pageFourteen();
+                break;
         }
     }
 
@@ -260,10 +259,9 @@ public class Console {
         }
     }
 
-    private void pageEight() throws IOException{
+    private void pageEight() throws IOException{/*Select member*/
         Scanner scanner = new Scanner(System.in);
-        if (reg.memberExists(id)) {
-
+        if (reg.memberExists(id)) {/*Checking if user exist*/
             System.out.println("|============== Member: " + id + " ===============|");
             System.out.println("| Select a number to get to the             |");
             System.out.println("| corresponding page.                       |");
@@ -272,41 +270,49 @@ public class Console {
             System.out.println("| 11. Edit boat                             |");
             System.out.println("| 12. Delete boat                           |");
             System.out.println("| 13. Delete member                         |");
+            System.out.println("| 14. Display member info                   |");
             System.out.println("| 0.  Return                                |");
             System.out.println("|===========================================|");
             input = scanner.nextLine();
-            while (!input.equals("0")) {
-                   if(input.equals("13")) {
-                       System.out.println("Are you sure that you want to delete " + reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ")" + " Yes/No");
+
+            while (!input.equals("0")) {  /*User didn't press return*/
+
+                   if(input.equals("13")) { /*User wants to delete member*/
+
+                       System.out.println("Are you sure that you want to delete " + reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ")" + " Yes/No");/*Asking user if he wants to delete member*/
                        confirm = scanner.nextLine();
-                       if (confirm.toLowerCase().equals("yes")) {
+
+                       if (confirm.toLowerCase().equals("yes")) { /*User types yes, delete member*/
                            reg.deleteMember(reg.getMember(id));
                            System.out.println("Member " + "id " + "was deleted.");
                            start();
-                       } else if (confirm.toLowerCase().equals("no")) {
+
+                       } else if (confirm.toLowerCase().equals("no")) {  /*User types no, return to page 8*/
                            System.out.println(reg.getMember(id).getName() + " was not deleted.");
                            pageSwitcher("8");
-                       } else {
+
+                       } else { /*User didnt write yes or no, go back to delete member and ask again*/
                            System.err.println("Member was not deleted, you can only write yes or no. Try again.");
                            input = "13";
                        }
-                   }else if(input.matches("\\d+")&&(Integer.valueOf(input)<=13 && Integer.valueOf(input)>=9)){
-                       pageSwitcher(input);
+                   }else if(input.matches("\\d+")&&(Integer.valueOf(input)<=14 && Integer.valueOf(input)>=9)){/*User wants to go to another page*/
+                       pageSwitcher(input);/*change page*/
                    }else{
-                       System.err.println("You can only press on of the pages listed above. Try again.");
+                       System.err.println("You can only press on of the pages listed above. Try again.");/*User pressed wrong button or a page that dosent exist, return to page 8 again*/
                        pageEight();
                 }
             }
             start();
         }
-        else {
+        else {/*User dosent exist, return to page 2 and ask user to write a new id*/
             System.err.println("Member doesn't exist. Try again!");
             pageSwitcher("2");
         }
     }
 
-    private void pageNine() throws IOException{
+    private void pageNine() throws IOException{/*Edit member*/
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("|========== Edit member:  "+ id +" =========|");
         System.out.println("| Select a number to get to the             |");
         System.out.println("| corresponding page.                       |");
@@ -315,38 +321,37 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         input = scanner.nextLine();
-        if (!input.equals("0")) {
+        if (!input.equals("0")) {/*User didnt press return*/
             switch (input) {
-                case "1":
+                case "1":  /*User pressed edit name*/
                     System.out.print("Enter name: ");
                     name = scanner.nextLine();
-                    if (name.isEmpty() || name.matches("\\d+")) {
+                    if (name.isEmpty() || name.matches("\\d+")) {   /*Checking if name is incorrect, empty or digits.  Return to edit member and ask again.*/
                         System.err.println("The name can't be empty or contain digits, please try again.");
                         pageSwitcher("9");
-                    }else {
-
+                    }else { /*If name was correct, change name*/
                         reg.getMember(id).setName(name);
                         pageSwitcher("9");
                     }
                     break;
-                case "2":
+                case "2":   /*User pressed edit personal number*/
                     System.out.print("Enter personal number: ");
                     pNumber = scanner.nextLine();
-                    if(!pNumber.matches("\\d+")){
+                    if(!pNumber.matches("\\d+")){   /*Checking if pNumber is incorrect, not digits. Return to edit member and ask again. */
                         System.err.println("The personal number can only contain digits and \"-\", please try again.");
                         pageSwitcher("9");
-                    }else{
+                    }else{  /*If pNumber was correct, change pNumber*/
                         reg.getMember(id).setPersonalNumber(pNumber);
                         pageSwitcher("9");
                     }
                     break;
-                default:
+                default:    /*If user didnt press any of the keys listed in the menu, return to edit member again and ask for right input*/
                     System.err.println("You can only press one of the keys listed above, try again.");
                     pageSwitcher("9");
                     break;
             }
         }
-        else {
+        else {  /*User pressed return, return to page 8(select member)*/
             pageSwitcher("8");
         }
     }
@@ -360,35 +365,35 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+        if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
             System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
             boatType = scanner.nextLine().toLowerCase();
-            if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")){
+            if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")){    /*Checks if user typed correct boat type*/
                 System.out.print("Enter boat length(cm): ");
                 boatLength = scanner.nextLine();
-                if(boatLength.matches("\\d+")) {
+                if(boatLength.matches("\\d+")) {    /*Checking if user typed correct boat length, only digits*/
                     System.out.println("Add boat to member? Yes/No");
                     confirm = scanner.nextLine();
-                    if (confirm.toLowerCase().equals("yes")) {
+                    if (confirm.toLowerCase().equals("yes")) {  /*If user wants to add boat, add boat to member*/
                         Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
                         reg.getMember(id).addBoat(boat);
                         System.out.println(boatType + "(" +boatLength + "cm) was added");
                         pageSwitcher("10");
-                    } else if (confirm.toLowerCase().equals("no")) {
+                    } else if (confirm.toLowerCase().equals("no")) {    /*If user dosent want to add boat, return to page 10 again*/
                         System.out.println("Boat was not added.");
                         pageSwitcher("10");
-                    } else {
+                    } else {        /*User typed wrong input, yes/no. Return to page 10 again*/
                         System.err.println("Boat was not added, you can only write yes or no. Try again.");
                         pageSwitcher("10");
                     }
-                }else{
+                }else{  /*If boatlenght was incorrect, not digits.  return to page 10 again*/
                     System.err.println("Boat was not added, lenght must be digits. Try again.");
                     pageSwitcher("10");
                 }
-            }else{
+            }else{  /*If boattype was incorrect. return to page 10 again*/
                 System.err.println("Boat was not added, cant add boat of type "+boatType+". Try again.");
                 pageSwitcher("10");
-            }}else {
+            }}else {    /*If user pressed return, return to page 8*/
             pageSwitcher("8");
         }
 
@@ -402,53 +407,53 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+        if (!scanner.nextLine().equals("0")) {      /*User didnt press return*/
             System.out.print("Enter ID: ");
-            String temp = scanner.nextLine();
-            if (temp.matches("\\d+")) {
-                boatId = Integer.valueOf(temp);
-                if (reg.getMember(id).boatExists(boatId)) {
-                    boatId = Integer.parseInt(temp);
+            String tempBoatID = scanner.nextLine();
+            if (tempBoatID.matches("\\d+")) {     /*Checks if boat id is correct, only digits*/
+                boatId = Integer.valueOf(tempBoatID);
+                if (reg.getMember(id).boatExists(boatId)) { /*Checks if boat exist*/
+                    boatId = Integer.parseInt(tempBoatID);
                     String oldType = "" + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)";
                     System.out.println("Are you sure you want to edit " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)" + "? Yes/No");
                     confirm = scanner.nextLine();
-                    if (confirm.toLowerCase().equals("yes")) {
+                    if (confirm.toLowerCase().equals("yes")) {  /*User wants to edit boat*/
                         System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
                         boatType = scanner.nextLine();
-                        if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")) {
+                        if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")) {   /*Checking if boattype is correct, no digits and right type*/
                             System.out.print("Enter boat length(cm): ");
                             boatLength = scanner.nextLine();
-                            if(boatLength.matches("\\d+")) {
+                            if(boatLength.matches("\\d+")) {    /*Checking if boatlenght is correct, only digits.*/
                                 reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
                                 reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
                                 System.out.println(oldType + " was changed to " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)");
                                 pageSwitcher("11");
-                            }else{
+                            }else{  /*Boatlengt was incorrect, not digits. Return to page 11 again*/
                                 System.err.println("Boat was not added, lenght must be digits. Try again.");
                                 pageSwitcher("11");
                             }
-                        }else{
+                        }else{  /*Boattype was incorrect, digits or wrong type*/
                             System.err.println("Boat was not added, cant add boat of type "+boatType+". Try again.");
                             pageSwitcher("11");
                         }
-                    } else if (confirm.toLowerCase().equals("no")) {
+                    } else if (confirm.toLowerCase().equals("no")) {    /*User didnt want to edit boat*/
                         System.out.println(oldType + " was not edited.");
                         pageSwitcher("8");
-                    } else {
+                    } else {    /*User typed wrong input, not yes/no*/
                         System.err.println(oldType + "was not deleted, you can only write yes or no. Try again.");
                     }
                 }
-                else {
+                else {/*User typed wrong id, boat doesn't exist*/
                     System.err.println("The boat that you are trying to delete doesn't exist, please try again.");
-                    pageSwitcher("12");
+                    pageSwitcher("11");
                 }
             }
-            else {
+            else {  /*Id was not digits, return to page 11 again*/
                 System.err.println("You must type in a number, please try again.");
                 pageSwitcher("11");
             }
         }
-        else {
+        else {      /*User pressed return*/
             pageSwitcher("8");
         }
     }
@@ -495,6 +500,22 @@ public class Console {
         }
         else{
             pageEight();
+        }
+    }
+
+    private void pageFourteen() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("|========== Member " + id + " info =========|");
+        System.out.println("| Press ENTER to show member information,   |");
+        System.out.println("| press 0 to return to startpage.           |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+        if (!scanner.nextLine().equals("0")) {
+            reg.printMember(reg.getMember(id));
+            System.out.print("Press any key to return to startpage....");
+            scanner.nextLine();
+            pageSwitcher("8");
         }
     }
 }
