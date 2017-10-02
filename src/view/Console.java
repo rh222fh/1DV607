@@ -466,39 +466,39 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+        if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
             System.out.print("Enter ID: ");
-            String temp = scanner.nextLine();
-            if (temp.matches("\\d+")) {
-                boatId = Integer.valueOf(temp);
-                if (reg.getMember(id).boatExists(boatId)) {
+            String tempBoatID = scanner.nextLine();
+            if (tempBoatID.matches("\\d+")) {   /*Checks if boatid was correct, only digits*/
+                boatId = Integer.valueOf(tempBoatID);
+                if (reg.getMember(id).boatExists(boatId)) { /*Checking if boat with that id exist*/
                     System.out.println("Are you sure you want to remove: "+boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "cm ?");
                     confirm = scanner.nextLine();
-                    if (confirm.toLowerCase().equals("yes")) {
+                    if (confirm.toLowerCase().equals("yes")) {  /*User wants to remove boat. removing boat and return to page 8*/
                         reg.getMember(id).getBoats().remove(boatId);
                         pageSwitcher("8");
                     }
-                    else if(confirm.toLowerCase().equals("no")) {
+                    else if(confirm.toLowerCase().equals("no")) {   /*User didnt't want to remove boat. return to page 8*/
                         System.out.println("The boat was not deleted.");
                         pageSwitcher("8");
                     }
-                    else {
+                    else {      /*User typed wrong, yes/no*/
                         System.err.println("The boat was not deleted, you can only write yes or no. Try again.");
                         pageSwitcher("12");
                     }
                 }
-                else {
+                else {      /*Wrong id, no boat with that id*/
                     System.err.println("The boat that you are trying to delete doesn't exist, please try again.");
                     pageSwitcher("12");
                 }
 
             }
-            else {
+            else {      /*Boatid typed incorrect, not digits*/
                 System.err.println("You must type in a number, please try again.");
                 pageSwitcher("12");
             }
         }
-        else{
+        else{       /*User pressed return. return to page 8*/
             pageEight();
         }
     }
@@ -511,9 +511,9 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+        if (!scanner.nextLine().equals("0")) {      /*User didnt press return. showing information*/
             reg.printMember(reg.getMember(id));
-            System.out.print("Press any key to return to startpage....");
+            System.out.print("Press any key to return to startpage....");   /*Waiting for key press, return to page 8*/
             scanner.nextLine();
             pageSwitcher("8");
         }
