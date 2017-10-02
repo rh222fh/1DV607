@@ -33,7 +33,7 @@ public class Console {
         System.out.println("|===========================================|");
         System.out.print(":");
         confirm = scanner.nextLine();
-
+        /* If the user input equals any of the alternative numbers, otherwise it displays error message and reruns the start() method */
         if (confirm.equals("1") || confirm.equals("2") || confirm.equals("3") || confirm.equals("4") || confirm.equals("5") || confirm.equals("6") || confirm.equals("7")) {
             pageSwitcher(confirm);
         }
@@ -45,43 +45,43 @@ public class Console {
 
     private void pageSwitcher(String s) throws IOException{
         switch (s) {
-            case "1":
+            case "1": // Add member
                 pageOne();
                 break;
-            case "2":
+            case "2": // Select member
                 pageTwo();
                 break;
-            case "3":
+            case "3": // Show verbose list
                 pageThree();
                 break;
-            case "4":
+            case "4": // Show compact list
                 pageFour();
                 break;
-            case "5":
+            case "5": // Load registry
                 pageFive();
                 break;
-            case "6":
+            case "6": // Save registry
                 pageSix();
                 break;
-            case "7":
+            case "7": // Exit program
                 pageSeven();
                 break;
-            case "8":
+            case "8": // Member selected menu
                 pageEight();
                 break;
-            case "9":
+            case "9": // Edit member
                 pageNine();
                 break;
-            case "10":
+            case "10": // Add boat
                 pageTen();
                 break;
-            case "11":
+            case "11": // Edit boat
                 pageEleven();
                 break;
-            case "12":
+            case "12": // Delete boat
                 pageTwelve();
                 break;
-            case "14":
+            case "14": // Display member info
                 pageFourteen();
                 break;
         }
@@ -95,10 +95,11 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+
+        if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
             System.out.print("Enter name: ");
             name = scanner.nextLine();
-            if (name.isEmpty() || name.matches("\\d+")) {
+            if (name.isEmpty() || name.matches("\\d+")) { // If name is empty or contains digits
                 System.err.println("The name can't be empty or contain digits, please try again.");
                 pageSwitcher("1");
             }
@@ -106,28 +107,27 @@ public class Console {
             pNumber = scanner.nextLine();
             String clean = pNumber.replaceAll("-", "");
             if(!clean.matches("\\d+")){
-                System.err.println("The personal number can only contain digits and \"-\", please try again.");
+                System.err.println("The personal number can only contain digits and \"-\", please try again."); // If personal number contains letters or symbols
                 pageSwitcher("1");
             }
-
             else {
                 System.out.println("Add member to registry? Yes/No");
                 confirm = scanner.nextLine();
-                if (confirm.toLowerCase().equals("yes")) {
+                if (confirm.toLowerCase().equals("yes")) { // If input equals yes
                     Member m = new Member(pNumber, name);
                     reg.addMember(m);
                     System.out.println(m.getName() + "(Id=" + m.getId() + ") " + "added to registry");
                     start();
-                } else if (confirm.toLowerCase().equals("no")) {
+                } else if (confirm.toLowerCase().equals("no")) { // If input equals no
                     System.out.println("Member was not added.");
                     pageSwitcher("1");
-                } else {
+                } else { // Prints error message if something other than yes or no is inputted
                     System.err.println("Member was not added, you can only write yes or no. Try again.");
                     pageSwitcher("1");
                 }
             }
         }
-        else {
+        else { // If 0, rerun start
             start();
         }
     }
@@ -140,25 +140,25 @@ public class Console {
         System.out.println("| 0. Return                                 |");
         System.out.println("|===========================================|");
         System.out.print("Waiting for key press...");
-        if (!scanner.nextLine().equals("0")) {
+        if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
             System.out.print("Enter ID: ");
             String temp = scanner.nextLine();
-            if (temp.matches("\\d+")) {
+            if (temp.matches("\\d+")) { // If the input contains digits
                 id = Integer.valueOf(temp);
-                if (reg.memberExists(id)) {
+                if (reg.memberExists(id)) { // If member exists
                     pageSwitcher("8");
-                } else {
+                } else { // If member doesn't exist, print error message and return to page 2
                     System.err.println("A member with id: " + id + " doesn't exist, please try again.");
                     pageSwitcher("2");
                 }
             }
-            else {
+            else { // Prints error message if id contains anything other than digits
                 System.err.println("The id must be an integer, please try again. ");
                 pageSwitcher("2");
             }
 
         }
-        else {
+        else { // Rerun start method
             start();
         }
 
