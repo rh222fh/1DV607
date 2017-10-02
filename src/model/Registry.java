@@ -4,13 +4,16 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Class that represents a member registry
+ */
 public class Registry {
 
     private ArrayList<Member> members = new ArrayList<>();
 
     public void addMember(Member m){
-       members.add(m);
-       m.setId(generateId(m));
+        members.add(m);
+        m.setId(generateId(m));
     }
 
     private int generateId(Member m){
@@ -36,6 +39,28 @@ public class Registry {
         }
         System.out.println("Member not found!");
         return null;
+    }
+
+    public void printMember(Member m) {
+        int ID = m.getId();
+        String name = m.getName();
+        String pNumber = m.getPersonalNumber();
+        int boatLength;
+        Object boatType;
+        String boatInfo;
+
+        System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
+        if (!m.getBoats().isEmpty()) {
+            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, "0" + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
+            for (int i = 1; i < m.countBoats(); i++) {
+                boatType = m.getBoats().get(i).getType();
+                boatLength = m.getBoats().get(i).getLength();
+                boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
+                System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
+            }
+        } else {
+            System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
+        }
     }
 
     public void printCompactList(){

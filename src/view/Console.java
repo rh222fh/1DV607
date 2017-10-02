@@ -44,47 +44,46 @@ public class Console {
     }
 
     private void pageSwitcher(String s) throws IOException{
-
-        if (s.equals("1")) {
-            pageOne();
-        }
-        if (s.equals("2")) {
-            pageTwo();
-        }
-        if (s.equals("3")) {
-            pageThree();
-        }
-        if (s.equals("4")) {
-            pageFour();
-        }
-        if (s.equals("5")) {
-            pageFive();
-        }
-        if (s.equals("6")) {
-            pageSix();
-        }
-        if (s.equals("7")) {
-            pageSeven();
-        }
-
-        if (s.equals("8")) {
-            pageEight();
-        }
-
-        if (s.equals("9")) {
-            pageNine();
-        }
-
-        if (s.equals("10")) {
-            pageTen();
-        }
-
-        if (s.equals("11")) {
-            pageEleven();
-        }
-
-        if (s.equals("12")) {
-            pageTwelve();
+        switch (s) {
+            case "1":
+                pageOne();
+                break;
+            case "2":
+                pageTwo();
+                break;
+            case "3":
+                pageThree();
+                break;
+            case "4":
+                pageFour();
+                break;
+            case "5":
+                pageFive();
+                break;
+            case "6":
+                pageSix();
+                break;
+            case "7":
+                pageSeven();
+                break;
+            case "8":
+                pageEight();
+                break;
+            case "9":
+                pageNine();
+                break;
+            case "10":
+                pageTen();
+                break;
+            case "11":
+                pageEleven();
+                break;
+            case "12":
+                pageTwelve();
+                break;
+            case "14":
+                pageFourteen();
+                break;
         }
     }
 
@@ -272,6 +271,7 @@ public class Console {
             System.out.println("| 11. Edit boat                             |");
             System.out.println("| 12. Delete boat                           |");
             System.out.println("| 13. Delete member                         |");
+            System.out.println("| 14. Display member info                   |");
             System.out.println("| 0.  Return                                |");
             System.out.println("|===========================================|");
             input = scanner.nextLine();
@@ -290,7 +290,7 @@ public class Console {
                            System.err.println("Member was not deleted, you can only write yes or no. Try again.");
                            input = "13";
                        }
-                   }else if(input.matches("\\d+")&&(Integer.valueOf(input)<=13 && Integer.valueOf(input)>=9)){
+                   }else if(input.matches("\\d+")&&(Integer.valueOf(input)<=14 && Integer.valueOf(input)>=9)){
                        pageSwitcher(input);
                    }else{
                        System.err.println("You can only press on of the pages listed above. Try again.");
@@ -495,6 +495,22 @@ public class Console {
         }
         else{
             pageEight();
+        }
+    }
+
+    private void pageFourteen() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("|========== Member " + id + " info =========|");
+        System.out.println("| Press ENTER to show member information,   |");
+        System.out.println("| press 0 to return to startpage.           |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+        if (!scanner.nextLine().equals("0")) {
+            reg.printMember(reg.getMember(id));
+            System.out.print("Press any key to return to startpage....");
+            scanner.nextLine();
+            pageSwitcher("8");
         }
     }
 }
