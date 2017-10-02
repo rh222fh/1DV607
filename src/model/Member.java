@@ -1,6 +1,10 @@
 package model;
 
 import java.util.ArrayList;
+
+/**
+ * Class that represents a member object
+ */
 public class Member {
 
     /** Fields */

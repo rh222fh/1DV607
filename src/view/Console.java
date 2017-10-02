@@ -7,11 +7,7 @@ import model.Registry;
 import java.io.IOException;
 import java.util.Scanner;
 
-/**
- * Class that represents the console interface
- */
 public class Console {
-    /** Fields */
     private String name;
     private String pNumber;
     private int id = 0;
@@ -22,9 +18,6 @@ public class Console {
     private String boatType = "";
     private String boatLength;
 
-    /**
-     * Method that displays the start page of the software
-     */
     public void start() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Startpage ================|");
@@ -50,10 +43,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method that changes the current page with the given number
-     * @param s Specifies the page number
-     */
     private void pageSwitcher(String s) throws IOException{
 
         if (s.equals("1")) {
@@ -99,9 +88,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the Add member method to the user
-     */
     private void pageOne() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Add Member ===============|");
@@ -147,9 +133,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the Select member option to the user
-     */
     private void pageTwo() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============== Select member ==============|");
@@ -182,9 +165,6 @@ public class Console {
 
     }
 
-    /**
-     * Method for displaying the verbose list to the user
-     */
     private void pageThree() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show verbose list ============|");
@@ -202,9 +182,6 @@ public class Console {
 
     }
 
-    /**
-     * Method for displaying the compact list to the user
-     */
     private void pageFour() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Show compact list ============|");
@@ -221,9 +198,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the load registry to the user
-     */
     private void pageFive() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -248,9 +222,6 @@ public class Console {
 
     }
 
-    /**
-     * Method for displaying the save registry option to the user
-     */
     private void pageSix() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|============ Save new registry ============|");
@@ -274,9 +245,6 @@ public class Console {
 
     }
 
-    /**
-     * Method for displaying the exit function to the user
-     */
     private void pageSeven() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("Are you sure that you want to exit? Yes/No");
@@ -292,9 +260,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the options for a specific member to the user
-     */
     private void pageEight() throws IOException{
         Scanner scanner = new Scanner(System.in);
         if (reg.memberExists(id)) {
@@ -340,9 +305,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the edit function for a specific member to the user
-     */
     private void pageNine() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|========== Edit member:  "+ id +" =========|");
@@ -389,9 +351,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the add boat function to the user
-     */
     private void pageTen() throws IOException{
         Scanner scanner = new Scanner(System.in);
 
@@ -435,9 +394,6 @@ public class Console {
 
     }
 
-    /**
-     * Method for displaying edit boat function to the user
-     */
     private void pageEleven() throws IOException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("|================ Edit boat ================|");
@@ -497,9 +453,6 @@ public class Console {
         }
     }
 
-    /**
-     * Method for displaying the delete boat function to the user
-     */
     private void pageTwelve() throws IOException{
         Scanner scanner = new Scanner(System.in);
         System.out.println("|=============== Delete boat ===============|");
