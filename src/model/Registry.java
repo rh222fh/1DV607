@@ -20,6 +20,13 @@ public class Registry {
     }
 
     /**
+     * Method for returning all of the members
+     */
+    public ArrayList<Member> getMembers(){
+        return members;
+    }
+
+    /**
      * Method for generating a random member ID
      * @param m Specifies which member to get a randomized ID
      * @return Returns the generated ID as an int
@@ -56,89 +63,6 @@ public class Registry {
         }
         System.out.println("Member not found!");
         return null;
-    }
-
-    /**
-     * Method for printing a specific member info
-     * @param m Specifies which member to print
-     */
-    public void printMember(Member m) {
-        int ID = m.getId();
-        String name = m.getName();
-        String pNumber = m.getPersonalNumber();
-        int boatLength;
-        Object boatType;
-        String boatInfo;
-
-        /* Table header */
-        System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
-        /* If member has boats it prints them, otherwise skips printing them */
-        if (!m.getBoats().isEmpty()) {
-            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, "0" + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
-            for (int i = 1; i < m.countBoats(); i++) {
-                boatType = m.getBoats().get(i).getType();
-                boatLength = m.getBoats().get(i).getLength();
-                boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
-                System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
-            }
-        } else {
-            System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
-        }
-    }
-
-    /**
-     * Method for printing a compact list
-     */
-    public void printCompactList(){
-        int ID;
-        String name;
-        int numberOfBoats;
-
-        /* Table header */
-        System.out.printf("%-5s %-20s %-10s\n", "ID", "Name", "Number of Boats");
-        /* Loops through the list of members and prints them */
-        for (Member m: members) {
-            ID = m.getId();
-            name = m.getName();
-            numberOfBoats = m.countBoats();
-            System.out.printf("%-5s %-20s %-10s\n", ID, name, numberOfBoats);
-        }
-    }
-
-    /**
-     * Method for printing a verbose list
-     */
-    public void printVerboseList(){
-        int ID;
-        String name;
-        String pNumber;
-        int boatLength;
-        Object boatType;
-        String boatInfo;
-
-        /* Table header */
-        System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
-        /* Loops through the list of members and prints them */
-        for (Member m: members) {
-            ID = m.getId();
-            name = m.getName();
-            pNumber = m.getPersonalNumber();
-            /* If member has boats it prints them, otherwise skips printing them */
-            if(!m.getBoats().isEmpty()){
-                System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, "0" + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength()+"cm");
-                for (int i = 1; i <m.countBoats(); i++){
-                    boatType = m.getBoats().get(i).getType();
-                    boatLength = m.getBoats().get(i).getLength();
-                    boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
-                    System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
-                }
-            }else{
-                System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
-            }
-            /* Line separator between each member */
-            System.out.printf("%-5s %-20s %-20s %-10s\n", "-----", "----------------------", "--------------------", "-------------------------");
-
-        }
     }
 
     /**

@@ -80,7 +80,7 @@ public class Member {
      * @return Returns the number of boats for a specific member
      */
 
-    int countBoats(){
+    public int countBoats(){
         return boats.size();
     }
 
@@ -96,7 +96,7 @@ public class Member {
      * Method for getting a members personal number
      * @return Returns a specific members personal number
      */
-    String getPersonalNumber(){
+    public String getPersonalNumber(){
         return pNumber;
     }
 
