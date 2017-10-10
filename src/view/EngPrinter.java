@@ -1,0 +1,187 @@
+package view;
+
+public class EngPrinter {
+
+
+    public void startPageHeader() {
+        System.out.println("|=============== Start page ================|");
+        System.out.println("| Select a number to get to the             |");
+        System.out.println("| corresponding page.                       |");
+        System.out.println("| 1. Add member(s)                          |");
+        System.out.println("| 2. Select member                          |");
+        System.out.println("| 3. Show verbose list                      |");
+        System.out.println("| 4. Show compact list                      |");
+        System.out.println("| 5. Load registry                          |");
+        System.out.println("| 6. Save registry                          |");
+        System.out.println("| 7. Exit                                   |");
+        System.out.println("|===========================================|");
+        System.out.print(":");
+    }
+
+    public void addMemHeader() {
+        System.out.println("|================ Add Member ===============|");
+        System.out.println("| Enter member information and press        |");
+        System.out.println("| ENTER to continue or press 0 to return.   |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void selectMemHeader() {
+        System.out.println("|============== Select member ==============|");
+        System.out.println("| Enter member ID and press ENTER to        |");
+        System.out.println("| continue or press 0 to return.            |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void verboseListHeader() {
+        System.out.println("|============ Show verbose list ============|");
+        System.out.println("| Press ENTER to show a verbose list of all |");
+        System.out.println("| members, press 0 to return to startpage   |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void compactListHeader() {
+        System.out.println("|============ Show compact list ============|");
+        System.out.println("| Press ENTER to show a compact list of all |");
+        System.out.println("| members, press 0 to return to startpage   |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void loadRegHeader() {
+        System.out.println("|============ Load new registry ============|");
+        System.out.println("| Press YES to load a new registry          |");
+        System.out.println("| Press NO to return                        |");
+        System.out.println("|===========================================|");
+        System.out.println("Load new registry? Unsaved data will be lost! " + " Yes/No");
+    }
+
+    public void saveRegHeader() {
+        System.out.println("|============ Save new registry ============|");
+        System.out.println("| Press YES to save registry                |");
+        System.out.println("| Press NO to return                        |");
+        System.out.println("|===========================================|");
+        System.out.println("Save registry?" + " Yes/No");
+    }
+
+    public void memberMenuHeader(int id) {
+        System.out.println("|============== Member: " + id + " ===============|");
+        System.out.println("| Select a number to get to the             |");
+        System.out.println("| corresponding page.                       |");
+        System.out.println("| 9.  Edit member                           |");
+        System.out.println("| 10. Add boat                              |");
+        System.out.println("| 11. Edit boat                             |");
+        System.out.println("| 12. Delete boat                           |");
+        System.out.println("| 13. Delete member                         |");
+        System.out.println("| 14. Display member info                   |");
+        System.out.println("| 0.  Return                                |");
+        System.out.println("|===========================================|");
+    }
+
+    public void editMemberHeader(int id) {
+        System.out.println("|========== Edit member:  " + id + " =========|");
+        System.out.println("| Select a number to get to the             |");
+        System.out.println("| corresponding page.                       |");
+        System.out.println("| 1. Edit name                              |");
+        System.out.println("| 2. Edit personal number                   |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+    }
+
+    public void addBoatHeader() {
+        System.out.println("|================= Add Boat ================|");
+        System.out.println("| Enter boat information and press          |");
+        System.out.println("| ENTER to continue or press 0 to return.   |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void editBoatHeader() {
+        System.out.println("|================ Edit boat ================|");
+        System.out.println("| Enter boat ID and press ENTER to          |");
+        System.out.println("| continue or press 0 to return.            |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void deleteBoatHeader() {
+        System.out.println("|=============== Delete boat ===============|");
+        System.out.println("| Enter boat ID and press ENTER to          |");
+        System.out.println("| continue or press 0 to return.            |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void memberInfoHeader(int id) {
+        System.out.println("|========== Member " + id + " info =========|");
+        System.out.println("| Press ENTER to show member information,   |");
+        System.out.println("| press 0 to return to startpage.           |");
+        System.out.println("| 0. Return                                 |");
+        System.out.println("|===========================================|");
+        System.out.print("Waiting for key press...");
+    }
+
+    public void errorMessage(int messageID) {
+        switch (messageID) {
+            case 1:
+                System.err.println("You can only press one of the keys listed above, try again.");
+                break;
+            case 2:
+                System.err.println("The name can't be empty or contain digits, please try again.");
+                break;
+            case 3:
+                System.err.println("The personal number can only contain digits and \"-\", please try again.");
+                break;
+            case 4:
+                System.err.println("You can only write yes or no. Try again.");
+                break;
+            case 5:
+                System.err.println("A member with that ID doesn't exist, please try again.");
+                break;
+            case 6:
+                System.err.println("A boat with that ID doesn't exist, please try again.");
+                break;
+            case 7:
+                System.err.println("The ID must be a number, please try again.");
+                break;
+            case 8:
+                System.err.println("The boat length must be a number, please try again.");
+                break;
+            case 9:
+                System.err.println("Boat was not added, it can only be one of the types(Sailboat, Motorsailer, Canoe, Other). Try again.");
+                break;
+        }
+    }
+
+    public void outputMessage(int messageID) {
+        switch (messageID) {
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            case 9:
+                break;
+        }
+    }
+}
