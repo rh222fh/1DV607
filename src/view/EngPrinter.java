@@ -130,6 +130,27 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
+    public void addConfirmation(String in){
+        System.out.println(in +"added to registry");
+    }
+    public void deleteConfirmation(String in){
+        System.out.println("Are you sure that you want to delete " +in + " Yes/No");
+    }
+    public void addBoatConfirmation(String in){
+        System.out.println(in+" cm) was added");
+    }
+    public void editBoatConfirmation(String in){
+        System.out.println("Are you sure you want to edit " +in+ "cm)" + "? Yes/No");
+    }
+    public void editBoatMessage(String old, String changed){
+        System.out.println(old + " was changed to " + changed+ "cm)");
+    }
+    public void deleteBoatConfiramtion(String in){
+        System.out.println("Are you sure you want to remove: "+in+ "cm ?");
+    }
+
+
+
     public void errorMessage(int messageID) {
         switch (messageID) {
             case 1:
@@ -165,23 +186,60 @@ public class EngPrinter {
     public void outputMessage(int messageID) {
         switch (messageID) {
             case 1:
+                System.out.print("Enter name: ");
                 break;
             case 2:
+                System.out.print("Enter personal number: ");
                 break;
             case 3:
+                System.out.println("Add member to registry? Yes/No");
                 break;
             case 4:
+                System.out.println("Member was not added.");
                 break;
             case 5:
+                System.out.print("Enter ID: ");
                 break;
             case 6:
+                System.out.print("Press any key to return to startpage....");
                 break;
             case 7:
+                System.out.println("Registry was loaded!");
                 break;
             case 8:
+                System.out.println("Registry was saved");
                 break;
             case 9:
+                System.out.println("Are you sure that you want to exit? Yes/No");
                 break;
+            case 10:
+                System.out.println("Stopping program....");
+                break;
+            case 11:
+                System.out.println("Member was deleted.");
+                break;
+            case 12:
+                System.out.println("Member was not deleted.");
+                break;
+            case 13:
+                System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+                break;
+            case 14:
+                System.out.print("Enter boat length(cm): ");
+                break;
+            case 15:
+                System.out.println("Add boat to member? Yes/No");
+                break;
+            case 16:
+                System.out.println("Boat was not added.");
+                break;
+            case 17:
+                System.out.println("Boat was not edited.");
+                break;
+            case 18:
+                System.out.println("Boat was not deleted.");
+                break;
+
         }
     }
 }

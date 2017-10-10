@@ -95,13 +95,13 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         engPrint.addMemHeader();
         if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
-            System.out.print("Enter name: ");
+            engPrint.outputMessage(1);
             name = scanner.nextLine();
             if (name.isEmpty() || name.matches("\\d+")) { // If name is empty or contains digits
                 engPrint.errorMessage(2);
                 pageSwitcher("1");
             }
-            System.out.print("Enter personal number: ");
+            engPrint.outputMessage(2);
             pNumber = scanner.nextLine();
             String clean = pNumber.replaceAll("-", "");
             if(!clean.matches("\\d+")){
@@ -109,15 +109,16 @@ public class Console {
                 pageSwitcher("1");
             }
             else {
-                System.out.println("Add member to registry? Yes/No");
+                engPrint.outputMessage(3);
                 confirm = scanner.nextLine();
                 if (confirm.toLowerCase().equals("yes")) { // If input equals yes
                     Member m = new Member(pNumber, name);
                     reg.addMember(m);
-                    System.out.println(m.getName() + "(Id=" + m.getId() + ") " + "added to registry");
+                    String info = m.getName() + "(Id=" + m.getId() + ") ";
+                    engPrint.addConfirmation(info);
                     start();
                 } else if (confirm.toLowerCase().equals("no")) { // If input equals no
-                    System.out.println("Member was not added.");
+                    engPrint.outputMessage(4);
                     pageSwitcher("1");
                 } else { // Prints error message if something other than yes or no is inputted
                     engPrint.errorMessage(4);
@@ -137,7 +138,7 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         engPrint.selectMemHeader();
         if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
-            System.out.print("Enter ID: ");
+            engPrint.outputMessage(5);
             String temp = scanner.nextLine();
             if (temp.matches("\\d+")) { // If the input contains digits
                 id = Integer.valueOf(temp);
@@ -168,7 +169,7 @@ public class Console {
         engPrint.verboseListHeader();
         if (!scanner.nextLine().equals("0")) {  /*User didn't press return. Showing verbose list*/
             reg.printVerboseList();
-            System.out.print("Press any key to return to startpage....");   /*Waiting for key press to return to start page*/
+            engPrint.outputMessage(6);   /*Waiting for key press to return to start page*/
             scanner.nextLine();
             start();
         }
@@ -184,7 +185,7 @@ public class Console {
 
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return. Showing compact list*/
             reg.printCompactList();
-            System.out.print("Press any key to return to startpage....");   /*Waiting for key press to return to startpage*/
+            engPrint.outputMessage(6);
             scanner.nextLine();
             start();
         }
@@ -200,7 +201,7 @@ public class Console {
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to load registry. Loading and return to start*/
             reg.loadRegistry();
-            System.out.println("Registry was loaded!");
+            engPrint.outputMessage(7);
             start();
         }
         else if(confirm.toLowerCase().equals("no")) {   /*User dint want to load. returning to start*/
@@ -223,7 +224,7 @@ public class Console {
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to save registry. Saving and returning to start*/
             reg.saveRegistry();
-            System.out.println("Registry was saved");
+            engPrint.outputMessage(8);
             start();
         }
         else if(confirm.toLowerCase().equals("no")) {   /*User didnt want to save registry. returning to start*/
@@ -241,10 +242,10 @@ public class Console {
      */
     private void pageSeven() throws IOException{
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Are you sure that you want to exit? Yes/No");
+        engPrint.outputMessage(9);
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to exit program*/
-            System.out.println("Stopping program....");
+            engPrint.outputMessage(10);
             System.exit(0);
         } else if (confirm.toLowerCase().equals("no")) {    /*User didn't want to exit program. return to start page*/
             start();
@@ -262,21 +263,17 @@ public class Console {
         if (reg.memberExists(id)) {/*Checking if user exist*/
             engPrint.memberMenuHeader(id);
             input = scanner.nextLine();
-
             while (!input.equals("0")) {  /*User didn't press return*/
-
                    if(input.equals("13")) { /*User wants to delete member*/
-
-                       System.out.println("Are you sure that you want to delete " + reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ")" + " Yes/No");/*Asking user if he wants to delete member*/
+                       String info = reg.getMember(id).getName() + "(" + reg.getMember(id).getId() + ") ";
+                       engPrint.deleteConfirmation(info);/*Asking user if he wants to delete member*/
                        confirm = scanner.nextLine();
-
                        if (confirm.toLowerCase().equals("yes")) { /*User types yes, delete member*/
                            reg.deleteMember(reg.getMember(id));
-                           System.out.println("Member " + "id " + "was deleted.");
+                           engPrint.outputMessage(11);
                            start();
-
                        } else if (confirm.toLowerCase().equals("no")) {  /*User types no, return to page 8*/
-                           System.out.println(reg.getMember(id).getName() + " was not deleted.");
+                           engPrint.outputMessage(12);
                            pageSwitcher("8");
 
                        } else { /*User didnt write yes or no, go back to delete member and ask again*/
@@ -309,7 +306,7 @@ public class Console {
         if (!input.equals("0")) {/*User didnt press return*/
             switch (input) {
                 case "1":  /*User pressed edit name*/
-                    System.out.print("Enter name: ");
+                    engPrint.outputMessage(1);
                     name = scanner.nextLine();
                     if (name.isEmpty() || name.matches("\\d+")) {   /*Checking if name is incorrect, empty or digits.  Return to edit member and ask again.*/
                         engPrint.errorMessage(2);
@@ -320,7 +317,7 @@ public class Console {
                     }
                     break;
                 case "2":   /*User pressed edit personal number*/
-                    System.out.print("Enter personal number: ");
+                    engPrint.outputMessage(2);
                     pNumber = scanner.nextLine();
                     if(!pNumber.matches("\\d+")){   /*Checking if pNumber is incorrect, not digits. Return to edit member and ask again. */
                         engPrint.errorMessage(3);
@@ -349,21 +346,22 @@ public class Console {
         engPrint.addMemHeader();
 
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
-            System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+            engPrint.outputMessage(13);
             boatType = scanner.nextLine().toLowerCase();
             if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")){    /*Checks if user typed correct boat type*/
-                System.out.print("Enter boat length(cm): ");
+                engPrint.outputMessage(14);
                 boatLength = scanner.nextLine();
                 if(boatLength.matches("\\d+")) {    /*Checking if user typed correct boat length, only digits*/
-                    System.out.println("Add boat to member? Yes/No");
+                    engPrint.outputMessage(15);
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {  /*If user wants to add boat, add boat to member*/
                         Boat boat = new Boat(Boat.Type.valueOf(boatType.toLowerCase()), Integer.valueOf(boatLength));
                         reg.getMember(id).addBoat(boat);
-                        System.out.println(boatType + "(" +boatLength + "cm) was added");
+                        String info = boatType + "(" +boatLength;
+                        engPrint.addBoatConfirmation(info);
                         pageSwitcher("10");
                     } else if (confirm.toLowerCase().equals("no")) {    /*If user dosent want to add boat, return to page 10 again*/
-                        System.out.println("Boat was not added.");
+                        engPrint.outputMessage(16);
                         pageSwitcher("10");
                     } else {        /*User typed wrong input, yes/no. Return to page 10 again*/
                         engPrint.errorMessage(4);
@@ -388,27 +386,27 @@ public class Console {
     private void pageEleven() throws IOException {
         Scanner scanner = new Scanner(System.in);
         engPrint.editBoatHeader();
-
         if (!scanner.nextLine().equals("0")) {      /*User didnt press return*/
-            System.out.print("Enter ID: ");
+            engPrint.outputMessage(5);
             String tempBoatID = scanner.nextLine();
             if (tempBoatID.matches("\\d+")) {     /*Checks if boat id is correct, only digits*/
                 boatId = Integer.valueOf(tempBoatID);
                 if (reg.getMember(id).boatExists(boatId)) { /*Checks if boat exist*/
                     boatId = Integer.parseInt(tempBoatID);
                     String oldType = "" + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)";
-                    System.out.println("Are you sure you want to edit " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)" + "? Yes/No");
+                    engPrint.editBoatConfirmation(oldType);
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {  /*User wants to edit boat*/
-                        System.out.print("Enter type (Sailboat, Motorsailer, Canoe, Other): ");
+                        engPrint.outputMessage(13);
                         boatType = scanner.nextLine();
                         if(boatType.equals("sailboat")||boatType.equals("motorsailer")||boatType.equals("canoe")||boatType.equals("other")) {   /*Checking if boattype is correct, no digits and right type*/
-                            System.out.print("Enter boat length(cm): ");
+                            engPrint.outputMessage(14);
                             boatLength = scanner.nextLine();
                             if(boatLength.matches("\\d+")) {    /*Checking if boatlenght is correct, only digits.*/
                                 reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
                                 reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
-                                System.out.println(oldType + " was changed to " + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)");
+                                String newInfo= reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength();
+                                engPrint.editBoatMessage(oldType, newInfo);
                                 pageSwitcher("11");
                             }else{  /*Boatlengt was incorrect, not digits. Return to page 11 again*/
                                 engPrint.errorMessage(8);
@@ -419,7 +417,7 @@ public class Console {
                             pageSwitcher("11");
                         }
                     } else if (confirm.toLowerCase().equals("no")) {    /*User didnt want to edit boat*/
-                        System.out.println(oldType + " was not edited.");
+                        engPrint.outputMessage(17);
                         pageSwitcher("8");
                     } else {    /*User typed wrong input, not yes/no*/
                         engPrint.errorMessage(4);
@@ -447,19 +445,20 @@ public class Console {
         Scanner scanner = new Scanner(System.in);
         engPrint.deleteBoatHeader();
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
-            System.out.print("Enter ID: ");
+            engPrint.outputMessage(5);
             String tempBoatID = scanner.nextLine();
             if (tempBoatID.matches("\\d+")) {   /*Checks if boatid was correct, only digits*/
                 boatId = Integer.valueOf(tempBoatID);
                 if (reg.getMember(id).boatExists(boatId)) { /*Checking if boat with that id exist*/
-                    System.out.println("Are you sure you want to remove: "+boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength() + "cm ?");
+                    String info = +boatId +". " + reg.getMember(id).getBoats().get(boatId).getType() +" " + reg.getMember(id).getBoats().get(boatId).getLength();
+                    engPrint.deleteBoatConfiramtion(info);
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {  /*User wants to remove boat. removing boat and return to page 8*/
                         reg.getMember(id).getBoats().remove(boatId);
                         pageSwitcher("8");
                     }
                     else if(confirm.toLowerCase().equals("no")) {   /*User didnt't want to remove boat. return to page 8*/
-                        System.out.println("The boat was not deleted.");
+                        engPrint.outputMessage(18);
                         pageSwitcher("8");
                     }
                     else {      /*User typed wrong, yes/no*/
@@ -491,7 +490,7 @@ public class Console {
         engPrint.memberInfoHeader(id);
         if (!scanner.nextLine().equals("0")) {      /*User didnt press return. showing information*/
             reg.printMember(reg.getMember(id));
-            System.out.print("Press any key to return to startpage....");   /*Waiting for key press, return to page 8*/
+            engPrint.outputMessage(6);
             scanner.nextLine();
             pageSwitcher("8");
         }
