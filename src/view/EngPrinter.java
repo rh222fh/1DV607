@@ -1,9 +1,7 @@
 package view;
 
-public class EngPrinter {
-
-
-    public void startPageHeader() {
+class EngPrinter {
+    void startPageHeader() {
         System.out.println("|=============== Start page ================|");
         System.out.println("| Select a number to get to the             |");
         System.out.println("| corresponding page.                       |");
@@ -18,7 +16,7 @@ public class EngPrinter {
         System.out.print(":");
     }
 
-    public void addMemHeader() {
+    void addMemHeader() {
         System.out.println("|================ Add Member ===============|");
         System.out.println("| Enter member information and press        |");
         System.out.println("| ENTER to continue or press 0 to return.   |");
@@ -27,7 +25,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void selectMemHeader() {
+    void selectMemHeader() {
         System.out.println("|============== Select member ==============|");
         System.out.println("| Enter member ID and press ENTER to        |");
         System.out.println("| continue or press 0 to return.            |");
@@ -36,7 +34,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void verboseListHeader() {
+    void verboseListHeader() {
         System.out.println("|============ Show verbose list ============|");
         System.out.println("| Press ENTER to show a verbose list of all |");
         System.out.println("| members, press 0 to return to startpage   |");
@@ -45,7 +43,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void compactListHeader() {
+    void compactListHeader() {
         System.out.println("|============ Show compact list ============|");
         System.out.println("| Press ENTER to show a compact list of all |");
         System.out.println("| members, press 0 to return to startpage   |");
@@ -54,7 +52,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void loadRegHeader() {
+    void loadRegHeader() {
         System.out.println("|============ Load new registry ============|");
         System.out.println("| Press YES to load a new registry          |");
         System.out.println("| Press NO to return                        |");
@@ -62,7 +60,7 @@ public class EngPrinter {
         System.out.println("Load new registry? Unsaved data will be lost! " + " Yes/No");
     }
 
-    public void saveRegHeader() {
+    void saveRegHeader() {
         System.out.println("|============ Save new registry ============|");
         System.out.println("| Press YES to save registry                |");
         System.out.println("| Press NO to return                        |");
@@ -70,7 +68,7 @@ public class EngPrinter {
         System.out.println("Save registry?" + " Yes/No");
     }
 
-    public void memberMenuHeader(int id) {
+    void memberMenuHeader(int id) {
         System.out.println("|============== Member: " + id + " ===============|");
         System.out.println("| Select a number to get to the             |");
         System.out.println("| corresponding page.                       |");
@@ -84,7 +82,7 @@ public class EngPrinter {
         System.out.println("|===========================================|");
     }
 
-    public void editMemberHeader(int id) {
+    void editMemberHeader(int id) {
         System.out.println("|========== Edit member:  " + id + " =========|");
         System.out.println("| Select a number to get to the             |");
         System.out.println("| corresponding page.                       |");
@@ -94,7 +92,7 @@ public class EngPrinter {
         System.out.println("|===========================================|");
     }
 
-    public void addBoatHeader() {
+    void addBoatHeader() {
         System.out.println("|================= Add Boat ================|");
         System.out.println("| Enter boat information and press          |");
         System.out.println("| ENTER to continue or press 0 to return.   |");
@@ -103,7 +101,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void editBoatHeader() {
+    void editBoatHeader() {
         System.out.println("|================ Edit boat ================|");
         System.out.println("| Enter boat ID and press ENTER to          |");
         System.out.println("| continue or press 0 to return.            |");
@@ -112,7 +110,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void deleteBoatHeader() {
+    void deleteBoatHeader() {
         System.out.println("|=============== Delete boat ===============|");
         System.out.println("| Enter boat ID and press ENTER to          |");
         System.out.println("| continue or press 0 to return.            |");
@@ -121,7 +119,7 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void memberInfoHeader(int id) {
+    void memberInfoHeader(int id) {
         System.out.println("|========== Member " + id + " info =========|");
         System.out.println("| Press ENTER to show member information,   |");
         System.out.println("| press 0 to return to startpage.           |");
@@ -130,28 +128,28 @@ public class EngPrinter {
         System.out.print("Waiting for key press...");
     }
 
-    public void addConfirmation(String in){
+    void addConfirmation(String in){
         System.out.println(in +"added to registry");
     }
-    public void deleteConfirmation(String in){
+    void deleteConfirmation(String in){
         System.out.println("Are you sure that you want to delete " +in + " Yes/No");
     }
-    public void addBoatConfirmation(String in){
+    void addBoatConfirmation(String in){
         System.out.println(in+" cm) was added");
     }
-    public void editBoatConfirmation(String in){
+    void editBoatConfirmation(String in){
         System.out.println("Are you sure you want to edit " +in+ "cm)" + "? Yes/No");
     }
-    public void editBoatMessage(String old, String changed){
+    void editBoatMessage(String old, String changed){
         System.out.println(old + " was changed to " + changed+ "cm)");
     }
-    public void deleteBoatConfiramtion(String in){
+    void deleteBoatConfiramtion(String in){
         System.out.println("Are you sure you want to remove: "+in+ "cm ?");
     }
 
 
 
-    public void errorMessage(int messageID) {
+    void errorMessage(int messageID) {
         switch (messageID) {
             case 1:
                 System.err.println("You can only press one of the keys listed above, try again.");
@@ -183,7 +181,7 @@ public class EngPrinter {
         }
     }
 
-    public void outputMessage(int messageID) {
+    void outputMessage(int messageID) {
         switch (messageID) {
             case 1:
                 System.out.print("Enter name: ");

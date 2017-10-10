@@ -97,7 +97,7 @@ public class Console {
         if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
             engPrint.outputMessage(1);
             name = scanner.nextLine();
-            if (name.isEmpty() || name.matches("\\d+")) { // If name is empty or contains digits
+            if (name.isEmpty() || name.matches(".*\\d+.*")) { // If name is empty or contains digits
                 engPrint.errorMessage(2);
                 pageSwitcher("1");
             }
@@ -343,7 +343,7 @@ public class Console {
      */
     private void pageTen() throws IOException{
         Scanner scanner = new Scanner(System.in);
-        engPrint.addMemHeader();
+        engPrint.addBoatHeader();
 
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
             engPrint.outputMessage(13);
