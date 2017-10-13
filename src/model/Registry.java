@@ -61,7 +61,6 @@ public class Registry {
                 return m;
             }
         }
-        System.out.println("Member not found!");
         return null;
     }
 
@@ -81,13 +80,8 @@ public class Registry {
     /**
      * Method for saving a registry to a text file
      */
-    public void saveRegistry(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Write your filepath and filename");
-        System.out.println("on mac: /Users/test/Desktop/registry.txt");
-        System.out.println("on windows: \\Users\\test\\Desktop\\registry.txt");
-        System.out.print(": ");
-        String filepath= scanner.nextLine();
+    public void saveRegistry(String filepath){
+        //String filepath= scanner.nextLine();
         StringBuilder printer = new StringBuilder();
 
         /* If file ends with .txt */
@@ -108,12 +102,10 @@ public class Registry {
 
                 }
             } catch (IOException e1) {
-                System.err.println("Can't write to that path!");
-                this.saveRegistry();
+              //  System.err.println("Can't write to that path!");
             }
         }else{
-            System.err.println("File need to be of type .txt");
-            this.saveRegistry();
+            //System.err.println("File need to be of type .txt");
             }
     }
 
