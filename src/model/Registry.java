@@ -111,12 +111,12 @@ public class Registry {
      * Method for loading a registry from a text file
      */
     public void loadRegistry(String filepath)throws FileNotFoundException {
-        File f = new File(filepath);
+        File file = new File(filepath);
 
         /* If file exists and if it ends with .txt */
-        if (f.exists() && filepath.matches(".*.txt")) {
+        if (file.exists() && filepath.matches(".*.txt")) {
             FileInputStream fstream = new FileInputStream(filepath);
-            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fstream));
 
             this.members.clear();
             String id = "";
@@ -128,11 +128,11 @@ public class Registry {
             String strLine;
             char symbol = '%';
             try {
-                while ((strLine = br.readLine()) != null) {
+                while ((strLine = bufferedReader.readLine()) != null) {
                     System.out.println();
                     String reader = "";
                     int counter = 0;
-                    Member m;
+                    Member member;
                     /* Loop that goes through the file */
                     for (int i = 0; i < strLine.length() + 1; i++) {
                         if (counter == 1) { // If there is 1 % symbol, set value to name
@@ -144,9 +144,9 @@ public class Registry {
                             reader = "";
                             counter = 0;
                         } else if (counter == 3) { // If there are 3 % symbols, create member and set value to id
-                            m = new Member(pNumber, name);
-                            this.addMember(m);
-                            m.setId(Integer.valueOf(reader));
+                            member = new Member(pNumber, name);
+                            this.addMember(member);
+                            member.setId(Integer.valueOf(reader));
                             id = reader;
                             reader = "";
                             counter = 0;

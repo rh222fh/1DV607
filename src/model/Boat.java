@@ -6,7 +6,7 @@ package model;
 public class Boat {
 
     /** Fields */
-    private Type bt;
+    private Type boatType;
     private int length;
     private int id;
 
@@ -17,11 +17,11 @@ public class Boat {
 
     /**
      * Constructor for boat with parameters
-     * @param bt Specifies the type of the boat
+     * @param boatType Specifies the type of the boat
      * @param length Specifies the length of the boat
      */
-    public Boat(Type bt, int length) {
-        this.bt = bt;
+    public Boat(Type boatType, int length) {
+        this.boatType = boatType;
         this.length = length;
     }
 
@@ -34,7 +34,7 @@ public class Boat {
      * Method for getting the type
      * @return Returns the boat type
      */
-    public Type getType() { return bt; }
+    public Type getType() { return boatType; }
 
 
     /**
@@ -53,7 +53,7 @@ public class Boat {
      * Method for setting the boat type
      * @param bt Specifies the type
      */
-    public void setType(Type bt) { this.bt = bt; }
+    public void setType(Type bt) { this.boatType = bt; }
 
     /**
      * Method for getting the length

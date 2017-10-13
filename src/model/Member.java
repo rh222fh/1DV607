@@ -34,16 +34,16 @@ public class Member {
      * Method for setting a members name
      * @param s Specifies the new name
      */
-    public void setName(String s){
-        name = s;
+    public void setName(String inputName){
+        name = inputName;
     }
 
     /**
      * Method for setting a members personal number
      * @param s Specifies the new personal number
      */
-    public void setPersonalNumber(String s){
-        pNumber = s;
+    public void setPersonalNumber(String inputPnumber){
+        pNumber = inputPnumber;
     }
 
     /**

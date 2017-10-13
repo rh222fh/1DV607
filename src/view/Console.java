@@ -28,10 +28,8 @@ public class Console{
     public void start(Registry registry, IView view) throws IOException {
         reg = registry;
         print = view;
-        
         startPage();
     }
-
         /**
          * Method that displays the start page alternatives to the user
          *
@@ -115,8 +113,8 @@ public class Console{
             }
             print.outputMessage(2);
             pNumber = scanner.nextLine();
-            String clean = pNumber.replaceAll("-", "");
-            if (!clean.matches("\\d+")) {
+            String formatPnumber = pNumber.replaceAll("-", "");
+            if (!formatPnumber.matches("\\d+")) {
                 print.errorMessage(3); // If personal number contains letters or symbols
                 pageSwitcher("1");
             } else {
@@ -125,8 +123,8 @@ public class Console{
                 if (confirm.toLowerCase().equals("yes")) { // If input equals yes
                     Member m = new Member(pNumber, name);
                     reg.addMember(m);
-                    String info = m.getName() + "(Id=" + m.getId() + ") ";
-                    print.addConfirmation(info);
+                    String memberinfo = m.getName() + "(Id=" + m.getId() + ") ";
+                    print.addConfirmation(memberinfo);
                     startPage();
                 } else if (confirm.toLowerCase().equals("no")) { // If input equals no
                     print.outputMessage(4);
@@ -137,10 +135,8 @@ public class Console{
                 }
             }
         } else { // If 0, rerun start
-            startPage();
-        }
+            startPage(); }
     }
-
     /**
      * Method that displays the select member function to the user
      */
@@ -149,9 +145,9 @@ public class Console{
         print.selectMemHeader();
         if (!scanner.nextLine().equals("0")) { // If scanner.nextLine() isn't 0
             print.outputMessage(5);
-            String temp = scanner.nextLine();
-            if (temp.matches("\\d+")) { // If the input contains digits
-                id = Integer.valueOf(temp);
+            String inputID = scanner.nextLine();
+            if (inputID.matches("\\d+")) { // If the input contains digits
+                id = Integer.valueOf(inputID);
                 if (reg.memberExists(id)) { // If member exists
                     pageSwitcher("8");
                 } else { // If member doesn't exist, print error message and return to page 2
@@ -162,13 +158,10 @@ public class Console{
                 print.errorMessage(7);
                 pageSwitcher("2");
             }
-
         } else { // Rerun start method
             startPage();
         }
-
     }
-
     /**
      * Method for displaying the verbose list to the user
      */
@@ -181,16 +174,13 @@ public class Console{
             scanner.nextLine();
             startPage();
         }
-
     }
-
     /**
      * Method for displaying the compact list to the user
      */
     private void pageFour() throws IOException {
         Scanner scanner = new Scanner(System.in);
         print.compactListHeader();
-
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return. Showing compact list*/
             this.printCompactList();
             print.outputMessage(6);
@@ -198,22 +188,20 @@ public class Console{
             startPage();
         }
     }
-
     /**
      * Method displaying the function to load a registry
      */
     private void pageFive() throws IOException {
         Scanner scanner = new Scanner(System.in);
         print.loadRegHeader();
-
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to load registry. Loading and return to start*/
             print.filePathHeader();
             String filepath= scanner.nextLine();
-            File f = new File(filepath);
+            File file = new File(filepath);
 
         /* If file exists and if it ends with .txt */
-            if (f.exists() && filepath.matches(".*.txt")) {
+            if (file.exists() && filepath.matches(".*.txt")) {
                 reg.loadRegistry(filepath);
             }else{
                 System.err.println("File/filepath was not found, try again!");
@@ -227,16 +215,13 @@ public class Console{
             print.errorMessage(4);
             pageSwitcher("5");
         }
-
     }
-
     /**
      * Method displaying the function to save a registry
      */
     private void pageSix() throws IOException {
         Scanner scanner = new Scanner(System.in);
         print.saveRegHeader();
-
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to save registry. Saving and returning to start*/
             print.filePathHeader();
@@ -263,9 +248,7 @@ public class Console{
             print.errorMessage(4);
             pageSwitcher("6");
         }
-
     }
-
     /**
      * Method that displays the option to exit the software to the user
      */
@@ -283,7 +266,6 @@ public class Console{
             pageSwitcher("7");
         }
     }
-
     /**
      * Method that displays the options for a specific member to the user
      */
@@ -322,14 +304,12 @@ public class Console{
             pageSwitcher("2");
         }
     }
-
     /**
      * Method that displays the options for editing a specific member to the user
      */
     private void pageNine() throws IOException {/*Edit member*/
         Scanner scanner = new Scanner(System.in);
         print.editMemberHeader(id);
-
         input = scanner.nextLine();
         if (!input.equals("0")) {/*User didnt press return*/
             switch (input) {
@@ -364,14 +344,12 @@ public class Console{
             pageSwitcher("8");
         }
     }
-
     /**
      * Method that display the function for adding a boat to the user
      */
     private void pageTen() throws IOException {
         Scanner scanner = new Scanner(System.in);
         print.addBoatHeader();
-
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
             print.outputMessage(13);
             boatType = scanner.nextLine().toLowerCase();
@@ -407,7 +385,6 @@ public class Console{
         }
 
     }
-
     /**
      * Method that displays the function for editing a specific boat
      */
@@ -462,7 +439,6 @@ public class Console{
             pageSwitcher("8");
         }
     }
-
     /**
      * Method that displays the function for deleting a specific boat
      */
@@ -501,7 +477,6 @@ public class Console{
             pageEight();
         }
     }
-
     /**
      * Method that displays the information of a specific member to the user
      */
@@ -515,7 +490,6 @@ public class Console{
             pageSwitcher("8");
         }
     }
-
     /**
      * Method for printing a verbose list
      */
@@ -547,10 +521,8 @@ public class Console{
             }
             /* Line separator between each member */
             System.out.printf("%-5s %-20s %-20s %-10s\n", "-----", "----------------------", "--------------------", "-------------------------");
-
         }
     }
-
     /**
      * Method for printing a compact list
      */
@@ -558,7 +530,6 @@ public class Console{
         int ID;
         String name;
         int numberOfBoats;
-
         /* Table header */
         System.out.printf("%-5s %-20s %-10s\n", "ID", "Name", "Number of Boats");
         /* Loops through the list of members and prints them */
@@ -569,8 +540,6 @@ public class Console{
             System.out.printf("%-5s %-20s %-10s\n", ID, name, numberOfBoats);
         }
     }
-
-
     /**
      * Method for printing a specific member info
      *
@@ -583,7 +552,6 @@ public class Console{
         int boatLength;
         Object boatType;
         String boatInfo;
-
         /* Table header */
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
         /* If member has boats it prints them, otherwise skips printing them */
