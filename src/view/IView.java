@@ -1,6 +1,6 @@
 package view;
 
-public interface langInterface {
+public interface IView {
 
     void startPageHeader();
 

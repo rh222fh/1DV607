@@ -18,14 +18,14 @@ public class Console{
     private String input;
     private int boatId = 0;
     private Registry reg;
-    private view.langInterface print;
+    private IView print;
     private String confirm;
     private String boatType = "";
     private String boatLength;
 
 
 
-    public void start(Registry registry, view.langInterface view) throws IOException {
+    public void start(Registry registry, IView view) throws IOException {
         reg = registry;
         print = view;
         
@@ -375,7 +375,7 @@ public class Console{
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return*/
             print.outputMessage(13);
             boatType = scanner.nextLine().toLowerCase();
-            if (boatType.equals("sailboat") || boatType.equals("motorsailer") || boatType.equals("canoe") || boatType.equals("other")) {    /*Checks if user typed correct boat type*/
+            if (boatType.equals(Boat.Type.sailboat.toString()) || boatType.equals(Boat.Type.motorsailer.toString()) || boatType.equals(Boat.Type.canoe.toString()) || boatType.equals(Boat.Type.other.toString())) {    /*Checks if user typed correct boat type*/
                 print.outputMessage(14);
                 boatLength = scanner.nextLine();
                 if (boatLength.matches("\\d+")) {    /*Checking if user typed correct boat length, only digits*/
@@ -421,19 +421,19 @@ public class Console{
                 boatId = Integer.valueOf(tempBoatID);
                 if (reg.getMember(id).boatExists(boatId)) { /*Checks if boat exist*/
                     boatId = Integer.parseInt(tempBoatID);
-                    String oldType = "" + reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength() + "cm)";
+                    String oldType = "" + reg.getMember(id).getBoat(boatId) + "(" + reg.getMember(id).getBoat(boatId).getLength() + "cm)";
                     print.editBoatConfirmation(oldType);
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {  /*User wants to edit boat*/
                         print.outputMessage(13);
                         boatType = scanner.nextLine();
-                        if (boatType.equals("sailboat") || boatType.equals("motorsailer") || boatType.equals("canoe") || boatType.equals("other")) {   /*Checking if boattype is correct, no digits and right type*/
+                        if (boatType.equals(Boat.Type.sailboat.toString()) || boatType.equals(Boat.Type.motorsailer.toString()) || boatType.equals(Boat.Type.canoe.toString()) || boatType.equals(Boat.Type.other.toString())) {   /*Checking if boattype is correct, no digits and right type*/
                             print.outputMessage(14);
                             boatLength = scanner.nextLine();
                             if (boatLength.matches("\\d+")) {    /*Checking if boatlenght is correct, only digits.*/
-                                reg.getMember(id).getBoats().get(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
-                                reg.getMember(id).getBoats().get(boatId).setLength(Integer.valueOf(boatLength));
-                                String newInfo = reg.getMember(id).getBoats().get(boatId).getType() + "(" + reg.getMember(id).getBoats().get(boatId).getLength();
+                                reg.getMember(id).getBoat(boatId).setType(Boat.Type.valueOf(boatType.toLowerCase()));
+                                reg.getMember(id).getBoat(boatId).setLength(Integer.valueOf(boatLength));
+                                String newInfo = reg.getMember(id).getBoat(boatId).getType() + "(" + reg.getMember(id).getBoat(boatId).getLength();
                                 print.editBoatMessage(oldType, newInfo);
                                 pageSwitcher("11");
                             } else {  /*Boatlengt was incorrect, not digits. Return to page 11 again*/
@@ -475,11 +475,11 @@ public class Console{
             if (tempBoatID.matches("\\d+")) {   /*Checks if boatid was correct, only digits*/
                 boatId = Integer.valueOf(tempBoatID);
                 if (reg.getMember(id).boatExists(boatId)) { /*Checking if boat with that id exist*/
-                    String info = +boatId + ". " + reg.getMember(id).getBoats().get(boatId).getType() + " " + reg.getMember(id).getBoats().get(boatId).getLength();
+                    String info = +boatId + ". " + reg.getMember(id).getBoat(boatId).getType() + " " + reg.getMember(id).getBoat(boatId).getLength();
                     print.deleteBoatConfiramtion(info);
                     confirm = scanner.nextLine();
                     if (confirm.toLowerCase().equals("yes")) {  /*User wants to remove boat. removing boat and return to page 8*/
-                        reg.getMember(id).getBoats().remove(boatId);
+                        reg.getMember(id).deleteBoat(reg.getMember(id).getBoat(boatId));
                         pageSwitcher("8");
                     } else if (confirm.toLowerCase().equals("no")) {   /*User didnt't want to remove boat. return to page 8*/
                         print.outputMessage(18);
@@ -510,7 +510,7 @@ public class Console{
         print.memberInfoHeader(id);
         if (!scanner.nextLine().equals("0")) {      /*User didnt press return. showing information*/
             this.printMember(reg.getMember(id));
-            print.outputMessage(6);
+            print.outputMessage(19);
             scanner.nextLine();
             pageSwitcher("8");
         }
@@ -535,11 +535,11 @@ public class Console{
             pNumber = m.getPersonalNumber();
             /* If member has boats it prints them, otherwise skips printing them */
             if (!m.getBoats().isEmpty()) {
-                System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, "0" + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
+                System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, m.getBoats().get(0).getId() + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
                 for (int i = 1; i < m.countBoats(); i++) {
                     boatType = m.getBoats().get(i).getType();
                     boatLength = m.getBoats().get(i).getLength();
-                    boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
+                    boatInfo = m.getBoats().get(i).getId() + ". " + boatType + ". " + boatLength + "cm";
                     System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
                 }
             } else {
@@ -588,11 +588,11 @@ public class Console{
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
         /* If member has boats it prints them, otherwise skips printing them */
         if (!m.getBoats().isEmpty()) {
-            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, "0" + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
+            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, m.getBoats().get(0).getId() + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
             for (int i = 1; i < m.countBoats(); i++) {
                 boatType = m.getBoats().get(i).getType();
                 boatLength = m.getBoats().get(i).getLength();
-                boatInfo = i + ". " + boatType + ". " + boatLength + "cm";
+                boatInfo = m.getBoats().get(i).getId() + ". " + boatType + ". " + boatLength + "cm";
                 System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
             }
         } else {

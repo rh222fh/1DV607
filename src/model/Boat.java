@@ -8,6 +8,7 @@ public class Boat {
     /** Fields */
     private Type bt;
     private int length;
+    private int id;
 
     /**
      * Enum with all the different boat types
@@ -34,6 +35,19 @@ public class Boat {
      * @return Returns the boat type
      */
     public Type getType() { return bt; }
+
+
+    /**
+     * Method for setting the boat ID
+     * @param id Specifies the ID
+     */
+    public void setId(int id) { this.id = id; }
+
+    /**
+     * Method for getting the boat ID
+     */
+    public int getId() { return id; }
+
 
     /**
      * Method for setting the boat type

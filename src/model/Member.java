@@ -24,7 +24,6 @@ public class Member {
         name = mName;
     }
 
-
     /**
      * Empty constructor for member
      */
@@ -49,10 +48,35 @@ public class Member {
 
     /**
      * Method for adding a boat
-     * @param b Specifies the boat to be added
+     * @param boat Specifies the boat to be added
      */
-    public void addBoat(Boat b){
-        boats.add(b);
+    public void addBoat(Boat boat){
+        boats.add(boat);
+        boat.setId(generateId(boat));
+    }
+
+    public void deleteBoat(Boat boat){
+        boats.remove(boat);
+    }
+
+    public Boat getBoat(int id){
+        for (Boat boat : boats) {
+            if (id == boat.getId()) {
+                return boat;
+            }
+        }
+        return null;
+    }
+
+    private int generateId(Boat boat){
+        int id = (int)(Math.random()*90)+10;
+        for (int i = 0; i <boats.size() ; i++) {
+            if (boat.getId() == id){
+                id = (int)(Math.random()*90)+10;
+                i = 0;
+            }
+        }
+        return id;
     }
 
     /**
@@ -67,8 +91,8 @@ public class Member {
      * @return Return tru if boat exists, otherwise return false
      */
     public boolean boatExists(int id) {
-        for (int i = 0; i < boats.size(); i++) {
-            if (id == i) {
+        for (Boat boat : boats) {
+            if (id == boat.getId()) {
                 return true;
             }
         }
@@ -110,6 +134,6 @@ public class Member {
      * Method for setting a members id
      * @param id Specifies the id for a member
      */
-    void setId(Integer id){this.id = id;}
+    void setId(int id){this.id = id;}
 
 }

@@ -1,6 +1,6 @@
 package view;
 
-public class EngPrinter implements langInterface {
+public class EngPrint implements IView {
     public void startPageHeader() {
         System.out.println("|=============== Start page ================|");
         System.out.println("| Select a number to get to the             |");
@@ -156,7 +156,7 @@ public class EngPrinter implements langInterface {
     }
 
     public void deleteBoatConfiramtion(String in){
-        System.out.println("Are you sure you want to remove: "+in+ "cm ?");
+        System.out.println("Are you sure you want to remove: "+in+ "cm ? Yes/No");
     }
 
     public void errorMessage(int messageID) {
@@ -246,6 +246,9 @@ public class EngPrinter implements langInterface {
                 break;
             case 18:
                 System.out.println("Boat was not deleted.");
+                break;
+            case 19:
+                System.out.println("Press any key to return...");
                 break;
 
         }
