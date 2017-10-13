@@ -104,21 +104,13 @@ public class Registry {
             } catch (IOException e1) {
               //  System.err.println("Can't write to that path!");
             }
-        }else{
-            //System.err.println("File need to be of type .txt");
-            }
+        }
     }
 
     /**
      * Method for loading a registry from a text file
      */
-    public void loadRegistry()throws FileNotFoundException {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Write your filepath");
-        System.out.println("on mac: /Users/test/Desktop/registry.tex");
-        System.out.println("on windows: \\Users\\test\\Desktop\\registry.tex");
-        System.out.print(": ");
-        String filepath= scanner.nextLine();
+    public void loadRegistry(String filepath)throws FileNotFoundException {
         File f = new File(filepath);
 
         /* If file exists and if it ends with .txt */
@@ -198,9 +190,6 @@ public class Registry {
                 e.printStackTrace();
             }
 
-        }else{
-            System.err.println("File/filepath was not found, try again!");
-            this.loadRegistry();
         }
     }
 }

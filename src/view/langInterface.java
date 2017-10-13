@@ -16,7 +16,7 @@ public interface langInterface {
 
     void saveRegHeader();
 
-    void savePathHeader();
+    void filePathHeader();
 
     void memberMenuHeader(int id);
 

@@ -4,9 +4,7 @@ import model.Boat;
 import model.Member;
 import model.Registry;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintWriter;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -210,10 +208,20 @@ public class Console{
 
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to load registry. Loading and return to start*/
-            reg.loadRegistry();
+            print.filePathHeader();
+            String filepath= scanner.nextLine();
+            File f = new File(filepath);
+
+        /* If file exists and if it ends with .txt */
+            if (f.exists() && filepath.matches(".*.txt")) {
+                reg.loadRegistry(filepath);
+            }else{
+                System.err.println("File/filepath was not found, try again!");
+                pageFive();
+            }
             print.outputMessage(7);
             startPage();
-        } else if (confirm.toLowerCase().equals("no")) {   /*User dint want to load. returning to start*/
+        }else if (confirm.toLowerCase().equals("no")) {   /*User dint want to load. returning to start*/
             startPage();
         } else {      /*User typed wrong, yes/no*/
             print.errorMessage(4);
@@ -231,7 +239,7 @@ public class Console{
 
         confirm = scanner.nextLine();
         if (confirm.toLowerCase().equals("yes")) {  /*User wants to save registry. Saving and returning to start*/
-            print.savePathHeader();
+            print.filePathHeader();
             String filepath= scanner.nextLine();
             /* If file ends with .txt */
             if(filepath.matches(".*.txt")) {

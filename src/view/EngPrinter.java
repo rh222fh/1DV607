@@ -68,7 +68,7 @@ public class EngPrinter implements langInterface {
         System.out.println("Save registry?" + " Yes/No");
     }
 
-    public void savePathHeader(){
+    public void filePathHeader(){
         System.out.println("Write your filepath and filename");
         System.out.println("on mac: /Users/test/Desktop/registry.txt");
         System.out.println("on windows: \\Users\\test\\Desktop\\registry.txt");
