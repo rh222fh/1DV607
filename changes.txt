@@ -17,6 +17,7 @@ Final submission - Workshop 2 - Changelog
 - Modified the code so that Registry is created in the Program class and not in the view package.
 
 
+
 -----------------------------------------
 Final submission - Workshop 1 - Changelog
 ---------------2017-09-17----------------
