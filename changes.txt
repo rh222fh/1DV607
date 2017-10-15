@@ -1,4 +1,23 @@
 -----------------------------------------
+Final submission - Workshop 2 - Changelog
+---------------2017-10-15----------------
+
+- Fixed MV-Separation by moving prints from model package to view package.
+
+- Made the Console class smaller by moving the prints to a print class.
+
+- Created an interface to be able easily change language and implemented the interface in the print class.
+
+- Fixed the boat class by making use of our enums outside of the class, and implemented a method to generate an ID for a specific boat. Also added methods getting a boat instead of going through the ArrayList in the Member class.
+
+- Refactoring some variables, attributes ect to make them more clear.
+
+- Remade the class diagram and the sequence diagram.
+
+- Modified the code so that Registry is created in the Program class and not in the view package.
+
+
+-----------------------------------------
 Final submission - Workshop 1 - Changelog
 ---------------2017-09-17----------------
 

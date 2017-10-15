@@ -7,9 +7,9 @@ import java.io.IOException;
 
 public class Program {
     public static void main(String[] args) throws IOException{
-        Registry reg = new Registry();
-        IView v = new EngPrint();
-        Console console = new Console();
-        console.start(reg, v);
+        Registry a_registry = new Registry();
+        IView a_view = new EngPrint();
+        Console a_console = new Console();
+        a_console.start(a_registry, a_view);
     }
 }

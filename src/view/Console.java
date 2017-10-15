@@ -25,9 +25,10 @@ public class Console{
 
 
 
-    public void start(Registry registry, IView view) throws IOException {
-        reg = registry;
-        print = view;
+    public void start(Registry a_registry, IView a_view) throws IOException {
+
+        reg = a_registry;
+        print = a_view;
         startPage();
     }
         /**
