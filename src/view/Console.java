@@ -32,12 +32,12 @@ public class Console{
         print = a_view;
         startPage();
     }
-        /**
-         * Method that displays the start page alternatives to the user
-         *
-         *
-         */
 
+    /**
+     * Method that displays the start page alternatives to the user
+     *
+     *
+     */
     public void startPage() throws IOException {
         Scanner scanner = new Scanner(System.in);
         print.startPageHeader();

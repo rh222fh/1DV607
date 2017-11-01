@@ -1,4 +1,19 @@
 -----------------------------------------
+FIX submission - Workshop 2 - Changelog
+---------------2017-11-01----------------
+- Replaced getBoats, getMembers with getBoatIterator and getMemberIterator and updated all the methods that use these methods mentioned
+
+- Fixed a bug in the save method
+
+- Added the method hasBoat() to the Member class, which checks if a member has any boats
+
+- Updated Sequence Diagrams by adding returns to the method calls
+
+- Updated the dependency/associations lines in the Class Diagram
+
+
+
+-----------------------------------------
 Final submission - Workshop 2 - Changelog
 ---------------2017-10-15----------------
 

@@ -144,5 +144,4 @@ public class Member {
      * @param id Specifies the id for a member
      */
     void setId(int id){this.id = id;}
-
 }

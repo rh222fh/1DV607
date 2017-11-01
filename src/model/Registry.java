@@ -196,7 +196,6 @@ public class Registry {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 }
