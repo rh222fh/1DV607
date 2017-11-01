@@ -2,6 +2,7 @@ package model;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -22,10 +23,9 @@ public class Registry {
     /**
      * Method for returning all of the members
      */
-    public ArrayList<Member> getMembers(){
-        return members;
+    public Iterator<Member> getMemberIterator(){
+        return this.members.iterator();
     }
-
     /**
      * Method for generating a random member ID
      * @param m Specifies which member to get a randomized ID
@@ -83,24 +83,31 @@ public class Registry {
     public void saveRegistry(String filepath){
         //String filepath= scanner.nextLine();
         StringBuilder printer = new StringBuilder();
+        Iterator<Member> memberIterator = this.getMemberIterator();
+        Iterator<Boat> boatIterator;
 
         /* If file ends with .txt */
         if(filepath.matches(".*.txt")) {
             try {
-                PrintWriter outputFile = new PrintWriter(new FileOutputStream(filepath, true));
+                PrintWriter outputFile = new PrintWriter(new FileOutputStream(filepath, false));
                 /* Loops through members and writes a number of % symbols, which is later used when loading specific info */
-                for (Member m : members) {
-                    printer.append(m.getName()).append("%").append(m.getPersonalNumber()).append("%%").append(m.getId()).append("%%%");
+               while(memberIterator.hasNext()) {
+                   Member member = memberIterator.next();
+                    printer.append(member.getName()).append("%").append(member.getPersonalNumber()).append("%%").append(member.getId()).append("%%%");
                     /* If member has boats */
-                    if (!m.getBoats().isEmpty()) {
-                        for (int i = 0; i < m.countBoats(); i++) {
-                            printer.append(m.getBoats().get(i).getType()).append("%%%%").append(m.getBoats().get(i).getLength()).append("%%%%%");
+                    if (member.hasBoats()) {
+                        boatIterator = member.getBoatIterator();
+                        while(boatIterator.hasNext()) {
+                            Boat boat = boatIterator.next();
+                            printer.append(boat.getType()).append("%%%%").append(boat.getLength()).append("%%%%%");
                         }
                     }
                     outputFile.println(printer);
+                    System.out.println(printer);
                     printer = new StringBuilder();
 
                 }
+                outputFile.close();
             } catch (IOException e1) {
               //  System.err.println("Can't write to that path!");
             }

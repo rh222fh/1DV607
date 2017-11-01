@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Class that represents a member object
@@ -32,7 +33,7 @@ public class Member {
 
     /**
      * Method for setting a members name
-     * @param s Specifies the new name
+     * @param inputName Specifies the new name
      */
     public void setName(String inputName){
         name = inputName;
@@ -40,7 +41,7 @@ public class Member {
 
     /**
      * Method for setting a members personal number
-     * @param s Specifies the new personal number
+     * @param inputPnumber Specifies the new personal number
      */
     public void setPersonalNumber(String inputPnumber){
         pNumber = inputPnumber;
@@ -83,8 +84,9 @@ public class Member {
      * Method for getting a list of boats for a specific member
      * @return returns the list of boats
      */
-    public ArrayList<Boat> getBoats(){ return boats; }
-
+    public Iterator<Boat> getBoatIterator(){
+        return this.boats.iterator();
+    }
     /**
      * Method to check if a specific boat exists
      * @param id Specifies the boat id
@@ -97,6 +99,13 @@ public class Member {
             }
         }
         return false;
+    }
+
+    public boolean hasBoats(){
+        if(boats.isEmpty()){
+            return false;
+        }
+        return true;
     }
 
     /**

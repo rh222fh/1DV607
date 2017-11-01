@@ -5,6 +5,7 @@ import model.Member;
 import model.Registry;
 
 import java.io.*;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -170,7 +171,7 @@ public class Console{
         Scanner scanner = new Scanner(System.in);
         print.verboseListHeader();
         if (!scanner.nextLine().equals("0")) {  /*User didn't press return. Showing verbose list*/
-            this.printVerboseList();
+            this.printVerboseList(reg.getMemberIterator());
             print.outputMessage(6);   /*Waiting for key press to return to start page*/
             scanner.nextLine();
             startPage();
@@ -183,7 +184,7 @@ public class Console{
         Scanner scanner = new Scanner(System.in);
         print.compactListHeader();
         if (!scanner.nextLine().equals("0")) {  /*User didnt press return. Showing compact list*/
-            this.printCompactList();
+            this.printCompactList(reg.getMemberIterator());
             print.outputMessage(6);
             scanner.nextLine();
             startPage();
@@ -494,7 +495,7 @@ public class Console{
     /**
      * Method for printing a verbose list
      */
-    public void printVerboseList() {
+    public void printVerboseList(Iterator<Member> memberIterator) {
         int ID;
         String name;
         String pNumber;
@@ -504,18 +505,24 @@ public class Console{
         /* Table header */
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
         /* Loops through the list of members and prints them */
-        for (Member m : reg.getMembers()) {
-            ID = m.getId();
-            name = m.getName();
-            pNumber = m.getPersonalNumber();
+        while(memberIterator.hasNext()) {
+            Member member = memberIterator.next();
+            Iterator<Boat> boatIterator = member.getBoatIterator();
+            ID = member.getId();
+            name = member.getName();
+            pNumber = member.getPersonalNumber();
             /* If member has boats it prints them, otherwise skips printing them */
-            if (!m.getBoats().isEmpty()) {
-                System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, m.getBoats().get(0).getId() + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
-                for (int i = 1; i < m.countBoats(); i++) {
-                    boatType = m.getBoats().get(i).getType();
-                    boatLength = m.getBoats().get(i).getLength();
-                    boatInfo = m.getBoats().get(i).getId() + ". " + boatType + ". " + boatLength + "cm";
-                    System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
+            if (member.hasBoats()){
+                    Boat boat = boatIterator.next();
+                    System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber,boat.getId() + ". " + boat.getType() + ". " + boat.getLength() + "cm");
+
+                    while(boatIterator.hasNext()) {
+                        boat = boatIterator.next();
+                        boatType = boat.getType();
+                        boatLength =boat.getLength();
+                        boatInfo = boat.getId() + ". " + boatType + ". " + boatLength + "cm";
+                        System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
+
                 }
             } else {
                 System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
@@ -527,17 +534,18 @@ public class Console{
     /**
      * Method for printing a compact list
      */
-    public void printCompactList() {
+    public void printCompactList(Iterator<Member> memberIterator) {
         int ID;
         String name;
         int numberOfBoats;
         /* Table header */
         System.out.printf("%-5s %-20s %-10s\n", "ID", "Name", "Number of Boats");
         /* Loops through the list of members and prints them */
-        for (Member m : reg.getMembers()) {
-            ID = m.getId();
-            name = m.getName();
-            numberOfBoats = m.countBoats();
+        while(memberIterator.hasNext()) {
+            Member member = memberIterator.next();
+            ID = member.getId();
+            name = member.getName();
+            numberOfBoats = member.countBoats();
             System.out.printf("%-5s %-20s %-10s\n", ID, name, numberOfBoats);
         }
     }
@@ -553,16 +561,21 @@ public class Console{
         int boatLength;
         Object boatType;
         String boatInfo;
+        Iterator<Boat> boatIterator = m.getBoatIterator();
         /* Table header */
         System.out.printf("%-5s %-22s %-20s %-10s\n", "ID", "Name", "Personal Number", "Boat information");
         /* If member has boats it prints them, otherwise skips printing them */
-        if (!m.getBoats().isEmpty()) {
-            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber, m.getBoats().get(0).getId() + ". " + m.getBoats().get(0).getType() + ". " + m.getBoats().get(0).getLength() + "cm");
-            for (int i = 1; i < m.countBoats(); i++) {
-                boatType = m.getBoats().get(i).getType();
-                boatLength = m.getBoats().get(i).getLength();
-                boatInfo = m.getBoats().get(i).getId() + ". " + boatType + ". " + boatLength + "cm";
+        if (m.hasBoats()){
+            Boat boat = boatIterator.next();
+            System.out.printf("%-5s %-22s %-20s %-10s\n", ID, name, pNumber,boat.getId() + ". " + boat.getType() + ". " + boat.getLength() + "cm");
+
+            while(boatIterator.hasNext()) {
+                boat = boatIterator.next();
+                boatType = boat.getType();
+                boatLength =boat.getLength();
+                boatInfo = boat.getId() + ". " + boatType + ". " + boatLength + "cm";
                 System.out.printf("%-5s %-22s %-20s %-10s\n", "", "", "", boatInfo);
+
             }
         } else {
             System.out.printf("%-5s %-22s %-20s\n", ID, name, pNumber);
