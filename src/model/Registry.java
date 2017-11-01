@@ -103,7 +103,6 @@ public class Registry {
                         }
                     }
                     outputFile.println(printer);
-                    System.out.println(printer);
                     printer = new StringBuilder();
 
                 }
